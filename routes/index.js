@@ -16,6 +16,7 @@ router.post('/', function (req, res) {
             console.log('There was an error saving the article, i think?' + err);
         } else {
             console.log('nice job.');
+            res.redirect('/');
         }
     });
 });
