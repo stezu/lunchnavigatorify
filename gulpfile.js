@@ -9,10 +9,12 @@ gulp.task('lint', function () {
         .pipe(jshint.reporter(stylish));
 });
 
-gulp.task('uglify', function () {
-    var uglify = require('gulp-uglify');
+gulp.task('build-js', function () {
+    var concat = require('gulp-concat'), 
+        uglify = require('gulp-uglify');
 
-    gulp.src('./public/js/*.js')
+    gulp.src('./source/js/*.js')
+        .pipe(concat('main.min.js'))
         .pipe(uglify())
         .pipe(gulp.dest('./public/js'));
 });
@@ -21,10 +23,10 @@ gulp.task('stylus', function () {
     var stylus = require('gulp-stylus'),
         autoprefixer = require('gulp-autoprefixer');
 
-    gulp.src('./public/styl/**/*.styl')
+    gulp.src('./source/styl/**/*.styl')
         .pipe(stylus())
         .pipe(autoprefixer())
         .pipe(gulp.dest('./public/styles'));
 });
 
-gulp.task('default', ['stylus', 'lint']);
+gulp.task('default', ['stylus', 'lint', 'build-js']);
