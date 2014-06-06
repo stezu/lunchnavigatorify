@@ -18,10 +18,12 @@ gulp.task('uglify', function () {
 });
 
 gulp.task('stylus', function () {
-    var stylus = require('gulp-stylus');
+    var stylus = require('gulp-stylus'),
+        autoprefixer = require('gulp-autoprefixer');
 
     gulp.src('./public/styl/**/*.styl')
         .pipe(stylus())
+        .pipe(autoprefixer())
         .pipe(gulp.dest('./public/styles'));
 });
 
