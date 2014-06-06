@@ -1,6 +1,7 @@
-var mongojs = require('mongojs');
+var config = require('../appconfig.js'),
+    mongojs = require('mongojs');
 
-var db = mongojs(, ['lunch']);
+var db = mongojs(config.mongo.mongo_uri, ['lunch']);
 
 exports.findAll = function (callback) {
     db.lunch.find().toArray(function (err, results) {
