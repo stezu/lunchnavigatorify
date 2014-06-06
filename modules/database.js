@@ -1,6 +1,6 @@
 var mongojs = require('mongojs');
 
-var db = mongojs('mongodb://lunchnavigatorify:letshavelunch!@kahana.mongohq.com:10039/lunch_db', ['lunch']);
+var db = mongojs(, ['lunch']);
 
 exports.findAll = function (callback) {
     db.lunch.find().toArray(function (err, results) {
