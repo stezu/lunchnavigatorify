@@ -1,0 +1,2 @@
+# ignore node modules... npm install yoself
+node_modules
