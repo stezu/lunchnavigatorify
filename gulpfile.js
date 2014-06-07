@@ -4,7 +4,7 @@ gulp.task('lint', function () {
     var jshint = require('gulp-jshint'),
         stylish = require('jshint-stylish');
 
-    gulp.src(['./public/js/*.js', './routes/*.js', './app.js'])
+    gulp.src(['./source/js/*.js', './routes/*.js', './app.js'])
         .pipe(jshint())
         .pipe(jshint.reporter(stylish));
 });
@@ -29,4 +29,16 @@ gulp.task('stylus', function () {
         .pipe(gulp.dest('./public/styles'));
 });
 
-gulp.task('default', ['stylus', 'lint', 'build-js']);
+gulp.task('server', function () {
+    var app = require('./app');
+
+    app.listen(3000, function () {
+        console.log('Web server running on localhost:3000');
+    });
+});
+
+gulp.task('watch', function () {
+    gulp.watch(['./source/js/*.js', './source/styl/**/*.styl'], ['stylus', 'build-js']);
+});
+
+gulp.task('default', ['stylus', 'lint', 'build-js', 'server', 'watch']);
