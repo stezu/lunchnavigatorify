@@ -38,7 +38,7 @@ gulp.task('server', function () {
 });
 
 gulp.task('watch', function () {
-    gulp.watch(['./source/js/*.js', './source/styl/**/*.styl'], ['stylus', 'build-js']);
+    gulp.watch(['./source/js/*.js', './source/styl/**/*.styl'], ['stylus', 'lint', 'build-js']);
 });
 
 gulp.task('default', ['stylus', 'lint', 'build-js', 'server', 'watch']);
