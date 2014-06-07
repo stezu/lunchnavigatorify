@@ -1,0 +1,14 @@
+extends layout
+
+block content
+    h1= title
+    p Welcome to #{title}
+
+    form(action='/yelp-search', method='post')
+        fieldset
+            label(for='lunchspot') search
+                input(id='lunchspot', name='lunchspot', type='text')
+        div
+            input(type='submit', value='submit')
+
+    block results
