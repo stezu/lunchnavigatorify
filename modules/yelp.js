@@ -11,7 +11,6 @@ exports.search = function (query, callback) {
     // we can totally make this super robust so you can pass an object with any number of options and
     // we can loop through the names and match them to their values
     // this will make for a nice interface with tons of options
-    console.log('we get in searchFor');
     yelp.search({
         term: query.term,
         location: query.location
