@@ -32,27 +32,6 @@ block footerjs
             return restaurant.name;
         }
 
-        function restaurantListFormat (item) {
-            var markup = '<li class="results__list__item">';
-
-            if (item.is_closed) {
-                markup += '<span class="results__list__item__closed">Closed :(</span>';
-            }
-
-            markup += '<a class="results__list__item__yelp-link" href="' + item.url + '">';
-                markup += '<img class="results__list__item__image" src="' + item.image_url + '">';
-                markup += '<span class="results__list__item__name">' + item.name + '</span>';
-            markup += '</a>';
-
-            markup += '<span class="results__list__item__rating">' + item.rating + '</span>';
-            markup += '<a class="results__list__item__telephone" href="tel:' + item.phone + '">' + item.display_phone.replace('+1-', '') + '</a>';
-
-            markup += '<a class="results__list__item__delete" href="#">X</a>';
-
-            markup += '</li>';
-            return markup;
-        }
-
         jQuery(function($) {
             var $form = $('.yelp-search'),
                 $results = $('.results');
@@ -61,7 +40,7 @@ block footerjs
                 .find('.yelp-search__field').select2({
                     minimumInputLength: 2,
                     ajax: {
-                        url: "/search",
+                        url: '/search',
                         data: function (term, page) {
                             return {
                                 'restaurant': term,
@@ -79,17 +58,17 @@ block footerjs
                 })
                 .end()
                 .submit(function(event) {
-                    var data = $form.find('.yelp-search__field').select2('data'),
-                        itemContent = restaurantListFormat(data);
+                    var data = $form.find('.yelp-search__field').select2('data');
 
                     $.ajax({
                         url: '/restaurant',
                         data: data,
                         type: 'post',
-                        success: function(data) {
-                            $results.html(data);
+                        success: function(results) {
+                            $results.html(results);
                         }
                     });
+
                     return false;
                 });
         });

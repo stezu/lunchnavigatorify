@@ -1,4 +1,16 @@
 block results
-    ul
+    ul.results__list
         - each location in locations
-            li #{ location.yelp.name }
+            li.results__list__item
+
+                if location.is_closed
+                    span.results__list__item__closed Closed :(
+
+                a.results__list__item__yelp-link(href="#{ location.yelp.url }")
+                    img.results__list__item__image(src="#{ location.yelp.image_url }")
+                    | #{ location.yelp.name }
+
+                span.results__list__item__rating #{ location.yelp.rating }
+                a.results__list__item__telephone(href="#{ location.yelp.phone }") #{ location.yelp.display_phone.replace('+1-', '') }
+
+                a.results__list__item__delete(href="#") X
