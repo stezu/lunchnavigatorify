@@ -23,8 +23,8 @@ gulp.task('stylus', function () {
     var stylus = require('gulp-stylus'),
         autoprefixer = require('gulp-autoprefixer');
 
-    gulp.src('./source/styl/**/*.styl')
-        .pipe(stylus())
+    gulp.src('./source/styl/main.styl')
+        .pipe(stylus({compress: true}))
         .pipe(autoprefixer())
         .pipe(gulp.dest('./public/styles'));
 });
