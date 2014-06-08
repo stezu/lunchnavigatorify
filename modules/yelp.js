@@ -8,16 +8,15 @@ var yelp = require('yelp').createClient({
 });
 
 exports.search = function (query, callback) {
-    // we can totally make this super robust so you can pass an object with any number of options and
-    // we can loop through the names and match them to their values
-    // this will make for a nice interface with tons of options
-    yelp.search({
-        category_filter: query.category_filter,
-        term: query.term,
-        location: query.location,
-        limit: query.limit,
-        location: 33612
-    }, function (err, data) {
+    yelp.search(
+    (function () {
+        var object = {};
+        for (item in query) {
+            object[item] = query[item];
+        }
+        return object;
+    })(),
+    function (err, data) {
         if (err) {
             console.log('There was a problem in yelp.search and it was', err);
         }
