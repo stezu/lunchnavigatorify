@@ -4,7 +4,7 @@ var router = express.Router();
 var yelp = require('../modules/yelp');
 
 router.get('/', function (req, res) {
-    res.render('yelpsearch', { title: 'lunchnavigatorify - yelp style' });
+    res.render('yelpsearch', { title: 'Lunch Me' });
 });
 
 router.post('/', function (req, res) {
