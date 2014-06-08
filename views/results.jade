@@ -4,19 +4,19 @@ block results
             li.results__list__item
 
                 if location.yelp
-                    if location.yelp.is_closed === true
+                    if (location.yelp.is_closed === true)
                         span.results__list__item__closed Closed :(
 
-                    if location.yelp.url
+                    if (location.yelp.url)
                         a.results__list__item__yelp-link(href="#{ location.yelp.url }")
                             if location.yelp.image_url
                                 img.results__list__item__image(src="#{ location.yelp.image_url }")
                             if location.yelp.name
                                 span.results__list__item__name #{ location.yelp.name }
 
-                    if location.yelp.rating
+                    if (location.yelp.rating)
                         span.results__list__item__rating #{ location.yelp.rating }
-                    if location.yelp.phone && location.yelp.display_phone
-                        a.results__list__item__telephone(href="#{ location.yelp.phone }") #{ location.yelp.display_phone.replace('+1-', '') }
+                    if (location.yelp.phone && location.yelp.display_phone)
+                        a.results__list__item__phone(href="#{ location.yelp.phone }") #{ location.yelp.display_phone.replace('+1-', '') }
 
-                    a.results__list__item__delete(href="#") X
+                    a.results__list__item__delete(href="#" data-id="#{ location._id }") X
