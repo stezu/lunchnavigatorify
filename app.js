@@ -6,6 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
+var search = require('./routes/search');
 var users = require('./routes/users');
 var yelptest = require('./routes/yelptest');
 
@@ -23,6 +24,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
+app.use('/search', search);
 app.use('/yelp-search', yelptest);
 app.use('/users', users);
 
