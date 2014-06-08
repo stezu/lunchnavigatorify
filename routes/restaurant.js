@@ -28,4 +28,16 @@ router.post('/', function (req, res) {
     });
 });
 
+router.delete('/', function (req, res) {
+    console.log(req);
+    db.deleteLocation({
+        _id: req.body.id
+    });
+    db.getLocations(function (err, results) {
+        res.render('results', {
+            locations: results
+        });
+    });
+});
+
 module.exports = router;
