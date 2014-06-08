@@ -44,14 +44,17 @@ jQuery(function($) {
         .submit(function(event) {
             var data = $form.find('.yelp-search__field').select2('data');
 
-            $.ajax({
-                url: '/restaurant',
-                data: data,
-                type: 'post',
-                success: function(results) {
-                    $results.html(results);
-                }
-            });
+            // If we submit an empty form, that's stupid.
+            if (data) {
+                $.ajax({
+                    url: '/restaurant',
+                    data: data,
+                    type: 'post',
+                    success: function(results) {
+                        $results.html(results);
+                    }
+                });
+            }
 
             return false;
         });
