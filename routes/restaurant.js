@@ -13,10 +13,7 @@ router.get('/', function (req, res) {
 
 router.post('/', function (req, res) {
     db.saveLocation({
-        yelp: {
-            id: req.body.id,
-            name: req.body.name
-        }
+        yelp: req.body
     }, function (err, saved) {
         if (err) {
             console.log('There was an error saving the location, probably:', err);
