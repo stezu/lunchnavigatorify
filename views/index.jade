@@ -10,6 +10,7 @@ block content
 
     .results
         block results
+            include results
 
 block footerjs
     script(type="text/javascript").
@@ -86,11 +87,7 @@ block footerjs
                         data: data,
                         type: 'post',
                         success: function(data) {
-                            if (!$results.find('ul.results__list').length) {
-                                $results.append('<ul class="results__list" />');
-                            }
-
-                            $results.find('ul.results__list').append(itemContent);
+                            $results.html(data);
                         }
                     });
                     return false;

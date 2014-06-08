@@ -22,8 +22,12 @@ router.post('/', function (req, res) {
             console.log('There was an error saving the location, probably:', err);
         } else {
             console.log('nice job.');
-            res.redirect('/');
         }
+    });
+    db.getLocations(function (err, results) {
+        res.render('results', {
+            locations: results
+        });
     });
 });
 

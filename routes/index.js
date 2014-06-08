@@ -6,9 +6,8 @@ var yelp = require('../modules/yelp');
 
 /* GET home page. */
 router.get('/', function (req, res) {
-    // res.render('index', { title: 'Lunch Me' });
     db.getLocations(function (err, results) {
-        res.render('results', {
+        res.render('index', {
             title: 'Lunch Me',
             locations: results
         });
