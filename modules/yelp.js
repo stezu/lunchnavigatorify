@@ -12,11 +12,14 @@ exports.search = function (query, callback) {
     // we can loop through the names and match them to their values
     // this will make for a nice interface with tons of options
     yelp.search({
+        category_filter: query.category_filter,
         term: query.term,
-        location: query.location
+        location: query.location,
+        limit: query.limit,
+        location: 33612
     }, function (err, data) {
         if (err) {
-            console.log('There was a problem in yelp.search and it was ' + err);
+            console.log('There was a problem in yelp.search and it was', err);
         }
         callback(err, data);
     });
