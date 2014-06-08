@@ -1,10 +1,10 @@
 var config = require('../appconfig.js'),
     mongojs = require('mongojs');
 
-var db = mongojs(config.mongo.mongo_uri, ['lunch']);
+var db = mongojs(config.mongo.mongo_uri, ['restaurants']);
 
 exports.findAll = function (callback) {
-    db.lunch.find().toArray(function (err, results) {
+    db.restaurants.find().toArray(function (err, results) {
         if (err) {
             console.log('There was an error in db.findAll ' + err);
         }
@@ -13,7 +13,7 @@ exports.findAll = function (callback) {
 };
 
 exports.saveLocation = function (location, callback) {
-    db.lunch.save(location, function (err, saved) {
+    db.restaurants.save(location, function (err, saved) {
         if (err) {
             console.log('There was an error in db.saveLocation:', err);
         }
