@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
 var search = require('./routes/search');
+var restaurant = require('./routes/restaurant');
 var users = require('./routes/users');
 var yelptest = require('./routes/yelptest');
 
@@ -25,6 +26,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/search', search);
+app.use('/restaurant', restaurant);
 app.use('/yelp-search', yelptest);
 app.use('/users', users);
 

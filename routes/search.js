@@ -11,14 +11,13 @@ router.get('/', function (req, res) {
         location: 33612
     }, function (err, data) {
         if (err) {
-            res.send('Yelp Error');
-        } else {
-            res.send(data);
-            // res.render('results', {
-            //     title: 'lunchnavigatorify - yelp style',
-            //     locations: data.businesses
-            // });
+            console.log('Yelp Error:', data);
         }
+        res.send(data);
+        // res.render('results', {
+        //     title: 'lunchnavigatorify - yelp style',
+        //     locations: data.businesses
+        // });
     });
 });
 

@@ -15,7 +15,7 @@ exports.findAll = function (callback) {
 exports.saveLocation = function (location, callback) {
     db.lunch.save(location, function (err, saved) {
         if (err) {
-            console.log('There was an error in db.saveLocatioin ' + err);
+            console.log('There was an error in db.saveLocation:', err);
         }
         callback (err, saved);
     });
