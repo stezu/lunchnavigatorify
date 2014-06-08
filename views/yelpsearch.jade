@@ -1,14 +1,11 @@
 extends layout
 
 block content
-    h1= title
-    p Welcome to #{title}
 
     form(class='yelp-search', action='/search', method='post')
         fieldset
-            label(class='yelp-search__field') Search
-                input(name='restaurant', type='search')
-        div
+            input(class='yelp-search__field', name='restaurant', placeholder='Search for a restaurant', type='search')
+
             input(type='submit', value='submit')
 
     block results
@@ -33,24 +30,33 @@ block footerjs
             return restaurant.name;
         }
         jQuery(function($) {
-            $('.yelp-search__field input').select2({
-                placeholder: "Search for a restaurant",
-                minimumInputLength: 2,
-                ajax: {
-                    url: "/search",
-                    data: function (term, page) {
-                        return {
-                            restaurant: term,
-                            'page_limit': 10
-                        };
+            var $form = $('.yelp-search');
+
+            $form
+                .find('.yelp-search__field').select2({
+                    minimumInputLength: 2,
+                    ajax: {
+                        url: "/search",
+                        data: function (term, page) {
+                            return {
+                                'restaurant': term,
+                                'page_limit': 10
+                            };
+                        },
+                        results: function (data, page) {
+                            return {results: data.businesses};
+                        }
                     },
-                    results: function (data, page) {
-                        return {results: data.businesses};
-                    }
-                },
-                formatResult: restaurantFormatResult, // omitted for brevity, see the source of this page
-                formatSelection: restaurantFormatSelection,  // omitted for brevity, see the source of this page
-                dropdownCssClass: "bigdrop", // apply css that makes the dropdown taller
-                escapeMarkup: function (m) { return m; } // we do not want to escape markup since we are displaying html in results
-            });
+                    formatResult: restaurantFormatResult, // omitted for brevity, see the source of this page
+                    formatSelection: restaurantFormatSelection,  // omitted for brevity, see the source of this page
+                    dropdownCssClass: "bigdrop", // apply css that makes the dropdown taller
+                    escapeMarkup: function (m) { return m; } // we do not want to escape markup since we are displaying html in results
+                })
+                .end()
+                .submit(function(event) {
+                    var data = $form.find('.yelp-search__field').select2('data');
+
+                    console.log(data);
+                    return false;
+                });
         });
