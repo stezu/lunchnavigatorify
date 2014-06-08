@@ -3,6 +3,14 @@ var router = express.Router();
 
 var db = require('../modules/database');
 
+router.get('/', function (req, res) {
+    db.getLocations(function (err, results) {
+        res.render('results', {
+            locations: results
+        });
+    });
+});
+
 router.post('/', function (req, res) {
     db.saveLocation({
         yelp: {

@@ -14,10 +14,6 @@ router.get('/', function (req, res) {
             console.log('Yelp Error:', data);
         }
         res.send(data);
-        // res.render('results', {
-        //     title: 'lunchnavigatorify - yelp style',
-        //     locations: data.businesses
-        // });
     });
 });
 
