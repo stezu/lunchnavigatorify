@@ -1,12 +1,14 @@
 extends layout
 
 block content
+    h1.page-title= title
 
-    form(class='yelp-search', action='/search', method='post')
-        fieldset
-            input(class='yelp-search__field', name='restaurant', placeholder='Search for a restaurant', type='search')
+    form.yelp-search(action='/search', method='post')
+        .yelp-search__container
+            fieldset.yelp-search__inputs
+                input.yelp-search__field.yelp-search__field--text(name='restaurant', placeholder='Search for a restaurant', type='search')
 
-            input(type='submit', value='submit')
+                input.yelp-search__field.yelp-search__field--submit(type='submit', value='Submit')
 
     .results
         block results

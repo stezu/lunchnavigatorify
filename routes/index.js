@@ -8,7 +8,7 @@ var yelp = require('../modules/yelp');
 router.get('/', function (req, res) {
     db.getLocations(function (err, results) {
         res.render('index', {
-            title: 'Lunch Me',
+            title: 'lunchnavigatorify',
             locations: results
         });
     });

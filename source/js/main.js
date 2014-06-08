@@ -20,8 +20,9 @@ jQuery(function($) {
     }
 
     $form
-        .find('.yelp-search__field').select2({
+        .find('.yelp-search__field--text').select2({
             minimumInputLength: 2,
+            multiple: true,
             ajax: {
                 url: '/search',
                 quietMillis: 150,
@@ -42,10 +43,10 @@ jQuery(function($) {
         })
         .end()
         .submit(function(event) {
-            var data = $form.find('.yelp-search__field').select2('data');
+            var data = $form.find('.yelp-search__field--text').select2('data');
 
             // If we submit an empty form, that's stupid.
-            if (data) {
+            if (data !== null && data.length) {
                 $.ajax({
                     url: '/restaurant',
                     data: data,

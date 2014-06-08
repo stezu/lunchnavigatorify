@@ -1,8 +1,122 @@
 @import "select2"
 
-.yelp-search
+$blue = #40b0bf
 
-	fieldset
-		border 0
-		margin 0
-		padding 0
+*
+    box-sizing border-box
+
+html,
+body
+    height 100%
+    margin 0
+    min-height 100%
+    padding 0
+
+.page-title
+    text-align center
+
+.yelp-search
+    padding 50px 0 100px
+    position relative
+
+    &__container
+        margin 0
+        width 100%
+
+    &__inputs
+        border 1px solid #ddd
+        border-radius 4px
+        margin 0 auto
+        max-width 800px
+        padding 0
+        width 98%
+
+    &__field
+        float left
+        font-size 16px
+        outline none
+        width 80%
+
+        .select2-search-field
+            width 100%
+
+            .select2-input
+                border 0
+                font-size 16px
+                height 50px
+                line-height 30px
+                margin 0
+                outline none
+                padding 20px 20px
+                width 100% !important
+
+        &--submit
+            background $blue
+            border none
+            border-radius 0 4px 4px 0
+            color #fff
+            cursor pointer
+            float right
+            height 50px
+            line-height 50px
+            width 20%
+
+
+.results__list
+    display flex
+    flex-wrap wrap
+    list-style none
+    margin 0
+    padding 0
+
+    &__item
+        border 1px solid #ddd
+        flex auto
+        position relative
+        width 33.333333333%
+
+        &__yelp-link
+            color $blue
+
+        &__image
+            float left
+
+        &__name
+            display block
+
+        &__delete
+            background $blue
+            border 2px solid $blue
+            border-radius 50%
+            font 0/0 a // hide text
+            height 25px
+            position absolute
+            right 10px
+            top 10px
+            transition background 250ms
+            width 25px
+
+            &::before,
+            &::after
+                background #fff
+                content ""
+                height 2px
+                left 50%
+                position absolute
+                top 50%
+                transition background 250ms
+                width 16px
+
+            &:before
+                transform translate(-50%, -50%) rotate(-45deg)
+
+            &:after
+                transform translate(-50%, -50%) rotate(45deg)
+
+            &:hover,
+            &:focus
+                background transparent
+
+                &::before,
+                &::after
+                    background $blue
