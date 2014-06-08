@@ -24,6 +24,7 @@ jQuery(function($) {
             minimumInputLength: 2,
             ajax: {
                 url: '/search',
+                quietMillis: 150,
                 data: function (term, page) {
                     return {
                         'restaurant': term,
