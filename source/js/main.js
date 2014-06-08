@@ -22,7 +22,6 @@ jQuery(function($) {
     $form
         .find('.yelp-search__field--text').select2({
             minimumInputLength: 2,
-            multiple: true,
             ajax: {
                 url: '/search',
                 quietMillis: 150,
@@ -46,7 +45,7 @@ jQuery(function($) {
             var data = $form.find('.yelp-search__field--text').select2('data');
 
             // If we submit an empty form, that's stupid.
-            if (data !== null && data.length) {
+            if (data !== null || data.length) {
                 $.ajax({
                     url: '/restaurant',
                     data: data,
@@ -59,4 +58,20 @@ jQuery(function($) {
 
             return false;
         });
+
+    $results.find('.results__list__item__delete').on('click touchend', function (e) {
+        console.log('touched');
+        $.ajax({
+            url: '/restaurant',
+            data: {
+                id: $(this).data('id')
+            },
+            type: 'delete',
+            success: function(results) {
+                console.log(results);
+                $results.html(results);
+            }
+        });
+        return false;
+    });
 });

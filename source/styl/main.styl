@@ -66,35 +66,46 @@ body
     display flex
     flex-wrap wrap
     list-style none
-    margin 0
+    margin 0 auto
+    max-width 1000px
     padding 0
 
     &__item
-        border 1px solid #ddd
+        background #f6f6f6
+        // border 1px solid #ddd
         flex auto
+        margin 1%
+        padding-right 25px
         position relative
-        width 33.333333333%
+        width 31.333333333%
 
         &__yelp-link
             color $blue
 
         &__image
             float left
+            margin-right 10px
 
         &__name
+            display block
+            margin-top 10px
+
+        &__rating
+            display block
+
+        &__phone
+            color $blue
             display block
 
         &__delete
             background $blue
-            border 2px solid $blue
-            border-radius 50%
             font 0/0 a // hide text
-            height 25px
+            height 20px
             position absolute
-            right 10px
-            top 10px
+            right 0
+            top 0
             transition background 250ms
-            width 25px
+            width 20px
 
             &::before,
             &::after
