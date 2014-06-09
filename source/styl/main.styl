@@ -72,30 +72,42 @@ body
 
     &__item
         background #f6f6f6
-        // border 1px solid #ddd
         flex auto
         margin 1%
-        padding-right 25px
         position relative
         width 31.333333333%
 
+        @media (max-width: 800px)
+            width 48%
+
+        @media (max-width: 600px)
+            width 98%
+
         &__yelp-link
             color $blue
+            text-decoration none
 
         &__image
             float left
-            margin-right 10px
+
+        &__details
+            overflow hidden // keep away from image
+            padding 10px
+            padding-right 25px
 
         &__name
             display block
-            margin-top 10px
+            font-size 1.2em
+            margin-bottom 5px
 
         &__rating
             display block
+            margin-bottom 5px
 
         &__phone
             color $blue
             display block
+            text-decoration none
 
         &__delete
             background $blue
