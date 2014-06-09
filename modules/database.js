@@ -25,10 +25,10 @@ exports.save = function (collection, data, callback) {
     });
 };
 
-exports.deleteLocation = function (location, justOne, callback) {
-    db.restaurants.remove(location, justOne, function (err, results) {
+exports.delete = function (collection, query, justOne, callback) {
+    db[collection].remove(query, justOne, function (err, results) {
         if (err) {
-            console.log('There was an error in db.deleteLocation:', err);
+            console.log('There was an error in db.delete:', err);
         }
         callback(err, results);
     });

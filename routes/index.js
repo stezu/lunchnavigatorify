@@ -6,7 +6,7 @@ var yelp = require('../modules/yelp');
 
 /* GET home page. */
 router.get('/', function (req, res) {
-    db.getLocations(function (err, results) {
+    db.find('restaurants', {}, function (err, results) {
         res.render('index', {
             title: 'lunchnavigatorify',
             locations: results

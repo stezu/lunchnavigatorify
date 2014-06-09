@@ -20,7 +20,7 @@ router.post('/', function (req, res) {
         } else {
             console.log('nice job.');
 
-            db.getLocations(function (err, results) {
+            db.find('restaurants', {}, function (err, results) {
                 res.render('results', {
                     locations: results
                 });
@@ -30,13 +30,13 @@ router.post('/', function (req, res) {
 });
 
 router.delete('/', function (req, res) {
-    db.deleteLocation({
+    db.delete('restaurants', {
         '_id': db.getObjectId(req.body.id)
     }, 1, function (err, results) {
         if (err) {
             console.log('There was an error deleting the location, I think?', err);
         } else {
-            db.getLocations(function (err, results) {
+            db.find('restaurants', {}, function (err, results) {
                 res.render('results', {
                     locations: results
                 });
