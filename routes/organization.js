@@ -18,9 +18,10 @@ router.get('/:organization', function (req, res) {
     });
 });
 
-router.put('/:organization/:type', function () {
-    var restaurant      = {},
-        restaurant.yelp = {};
+router.post('/:organization', function (req, res) {
+    var restaurant = {
+            yelp: {}
+        };
 
     restaurant.yelp.name        = req.body.name ? req.body.name : null;
     restaurant.yelp.yelp_id     = req.body.id ? req.body.id : null;
