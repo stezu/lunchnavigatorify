@@ -4,7 +4,7 @@ var router = express.Router();
 var db = require('../modules/database');
 
 router.get('/', function (req, res) {
-    db.getLocations(function (err, results) {
+    db.find('restaurants', {}, function (err, results) {
         res.render('results', {
             locations: results
         });
