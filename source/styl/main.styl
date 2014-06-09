@@ -1,7 +1,13 @@
 @import "select2"
 
+// ===================
+// Variables
+// ===================
 $blue = #40b0bf
 
+// ===================
+// Globals
+// ===================
 *
     box-sizing border-box
 
@@ -12,16 +18,37 @@ body
     min-height 100%
     padding 0
 
-.page-title
+// ===================
+// Patterns
+// ===================
+.button
+    background #f6f6f6
+    border 1px solid #ddd
+    border-radius 4px
+    color #444
+    display inline-block
+    padding 10px 15px
+    text-decoration none
+    transition background 250ms
+
+    &:hover,
+    &:focus
+        background darken(#f6f6f6, 5%)
+
+.center
     text-align center
 
-.yelp-search
-    padding 50px 0 100px
-    position relative
+// ===================
+// Header
+// ===================
+.page-header
+    padding 20px 20px 40px
+    &__title
+        text-align center
 
-    &__container
-        margin 0
-        width 100%
+.yelp-search
+    padding 40px 0 40px
+    position relative
 
     &__inputs
         border 1px solid #ddd
@@ -62,6 +89,9 @@ body
             width 20%
 
 
+// ===================
+// Content
+// ===================
 .results__list
     display flex
     flex-wrap wrap

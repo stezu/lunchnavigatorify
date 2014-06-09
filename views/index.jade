@@ -1,14 +1,17 @@
 extends layout
 
 block content
-    h1.page-title= title
+    header.page-header
+        h1.page-header__title= title
 
-    form.yelp-search(action='/search', method='post')
-        .yelp-search__container
+        form.yelp-search(action='/search', method='post')
             fieldset.yelp-search__inputs
                 input.yelp-search__field.yelp-search__field--text(name='restaurant', placeholder='Search for a restaurant', type='search')
 
                 input.yelp-search__field.yelp-search__field--submit(type='submit', value='Submit')
+
+        p.center
+            a.page-header__random.button.button-primary(href="#") Pick my Lunch
 
     .results
         block results
