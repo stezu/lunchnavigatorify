@@ -41,4 +41,25 @@ router.post('/:organization', function (req, res) {
     });
 });
 
+router.delete('/:organization', function (req, res) {
+    db.update('organizations', { slug: req.param('organization') },
+    {
+        "$pull": {
+            "restaurants": {
+                "_id": db.getObjectId(req.body.id)
+            }
+        }
+    }, function (err, results) {
+        if (err) {
+            console.log('There was an error deleting the location, I think?', err);
+        } else {
+            db.find('organizations', { slug: req.param('organization') }, function (err, results) {
+                res.render('results', {
+                    locations: results[0].restaurants
+                });
+            });
+        }
+    });
+});
+
 module.exports = router;

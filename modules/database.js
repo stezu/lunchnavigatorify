@@ -25,7 +25,7 @@ exports.save = function (collection, data, callback) {
         if (err) {
             console.log('There was an error in db.save:', err);
         }
-        callback (err, results);
+        callback(err, results);
     });
 };
 
@@ -34,7 +34,7 @@ exports.update = function (collection, query, data, callback) {
         if (err) {
             console.log('There was an error in db.update:', err);
         }
-        callback (err, results);
+        callback(err, results);
     });
 };
 
