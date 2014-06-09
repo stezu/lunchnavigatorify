@@ -7,8 +7,8 @@ exports.getObjectId = function (id) {
     return mongojs.ObjectId(id);
 };
 
-exports.findOrganization = function (query, callback) {
-    db.organizations.find(query, function (err, results) {
+exports.find = function (collection, query, callback) {
+    db[collection].find(query, function (err, results) {
         if (err) {
             console.log('There was an error in db.findAll:', err);
         }

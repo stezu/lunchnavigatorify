@@ -4,7 +4,7 @@ var router = express.Router();
 var db = require('../modules/database');
 
 router.get('/:organization', function (req, res) {
-    db.findOrganization({ slug: req.param('organization') }, function (err, results) {
+    db.find('organizations', { slug: req.param('organization') }, function (err, results) {
         if (err) {
             // this should send a friendly mesaage to the user that maybe triggers an alert or something
             console.log('There was an error retriving your organization\'s restaurants.');
