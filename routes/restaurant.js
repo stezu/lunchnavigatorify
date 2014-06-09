@@ -14,29 +14,34 @@ router.get('/', function (req, res) {
 router.post('/', function (req, res) {
     db.saveLocation({
         yelp: req.body
-    }, function (err, saved) {
+    }, function (err, results) {
         if (err) {
             console.log('There was an error saving the location, probably:', err);
         } else {
             console.log('nice job.');
+
+            db.getLocations(function (err, results) {
+                res.render('results', {
+                    locations: results
+                });
+            });
         }
-    });
-    db.getLocations(function (err, results) {
-        res.render('results', {
-            locations: results
-        });
     });
 });
 
 router.delete('/', function (req, res) {
     db.deleteLocation({
         '_id': db.getObjectId(req.body.id)
-    }, 1, function () {
-        db.getLocations(function (err, results) {
-            res.render('results', {
-                locations: results
+    }, 1, function (err, results) {
+        if (err) {
+            console.log('There was an error deleting the location, I think?', err);
+        } else {
+            db.getLocations(function (err, results) {
+                res.render('results', {
+                    locations: results
+                });
             });
-        });
+        }
     });
 });
 
