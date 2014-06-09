@@ -10,7 +10,7 @@ exports.getObjectId = function (id) {
 exports.findOrganization = function (query, callback) {
     db.organizations.find(query, function (err, results) {
         if (err) {
-            console.log('There was an error in db.findAll ' + err);
+            console.log('There was an error in db.findAll:', err);
         }
         callback(err, results);
     });
@@ -28,13 +28,17 @@ exports.saveLocation = function (location, callback) {
 exports.getLocations = function (callback) {
     db.restaurants.find().toArray(function (err, results) {
         if (err) {
-            console.log('There was an error in db.getLocations ' + err);
+            console.log('There was an error in db.getLocations:', err);
         }
         callback(err, results);
     });
 };
 
-exports.deleteLocation = function (location, callback) {
-    db.restaurants.remove(location);
-    callback();
+exports.deleteLocation = function (location, justOne, callback) {
+    db.restaurants.remove(location, justOne, function (err, results) {
+        if (err) {
+            console.log('There was an error in db.deleteLocation:', err);
+        }
+        callback(err, results);
+    });
 };
