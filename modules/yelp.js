@@ -8,15 +8,7 @@ var yelp = require('yelp').createClient({
 });
 
 exports.search = function (query, callback) {
-    yelp.search(
-    (function () {
-        var object = {};
-        for (item in query) {
-            object[item] = query[item];
-        }
-        return object;
-    })(),
-    function (err, data) {
+    yelp.search(query, function (err, data) {
         if (err) {
             console.log('There was a problem in yelp.search and it was', err);
         }
