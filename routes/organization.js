@@ -36,7 +36,13 @@ router.post('/:organization', function (req, res) {
         if (err) {
             console.log('There was an error adding this restaurant to your organization.  Sorry mate.', err);
         } else {
-            console.log(results);
+            console.log('Organization updated.');
+
+            db.find('organizations', { slug: req.param('organization') }, function (err, results) {
+                res.render('results', {
+                    locations: results[0].restaurants
+                });
+            });
         }
     });
 });
