@@ -28,7 +28,7 @@ router.put('/:organization/:type', function () {
     restaurant.yelp.is_closed   = req.body.is_closed ? req.body.is_closed : null;
     restaurant.yelp.yelp_url    = req.body.url ? req.body.url : null;
     restaurant.yelp.image_url   = req.body.image_url ? req.body.image_url : null;
-    restaurant.yelp.yelp_rating = req.body.rating ? restaurant.body.rating : null;
+    restaurant.yelp.yelp_rating = req.body.rating ? req.body.rating : null;
 
     db.update('organizations', { slug: req.param('organization') }, { '$push': { 'restaurants': restaurant }}, function (err, results) {
         if (err) {
