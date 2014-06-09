@@ -47,7 +47,6 @@ jQuery(function($) {
             // If we submit an empty form, that's stupid.
             if (data !== null || data.length) {
                 $.ajax({
-                    url: '/restaurant',
                     data: data,
                     type: 'post',
                     success: function(results) {
