@@ -7,6 +7,10 @@ exports.getObjectId = function (id) {
     return mongojs.ObjectId(id);
 };
 
+exports.makeObjectId = function () {
+    return new mongojs.ObjectId();
+};
+
 exports.find = function (collection, query, callback) {
     db[collection].find(query, function (err, results) {
         if (err) {
