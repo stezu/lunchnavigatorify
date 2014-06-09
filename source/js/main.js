@@ -41,7 +41,7 @@ jQuery(function($) {
             escapeMarkup: function (m) { return m; } // we do not want to escape markup since we are displaying html in results
         })
         .end()
-        .submit(function(event) {
+        .submit(function() {
             var data = $form.find('.yelp-search__field--text').select2('data');
 
             // If we submit an empty form, that's stupid.
@@ -59,7 +59,7 @@ jQuery(function($) {
             return false;
         });
 
-    $results.find('.results__list__item__delete').on('click touchend', function (e) {
+    $results.on('click touchend', '.results__list__item__delete', function () {
         console.log('touched');
         $.ajax({
             url: '/restaurant',
