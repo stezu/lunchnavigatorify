@@ -5,7 +5,6 @@ var yelp = require('../modules/yelp');
 
 router.get('/', function (req, res) {
     yelp.search({
-        category_filter: 'food',
         term: req.query.restaurant,
         limit: req.query.page_limit,
         location: 33612

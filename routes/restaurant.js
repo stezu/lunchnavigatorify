@@ -29,11 +29,9 @@ router.post('/', function (req, res) {
 });
 
 router.delete('/', function (req, res) {
-    var objectId = db.getObjectId(req.body.id);
-
     db.deleteLocation({
-        '_id': objectId
-    }, function () {
+        '_id': db.getObjectId(req.body.id)
+    }, 1, function () {
         db.getLocations(function (err, results) {
             res.render('results', {
                 locations: results
