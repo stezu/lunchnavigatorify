@@ -25,6 +25,15 @@ exports.save = function (collection, data, callback) {
     });
 };
 
+exports.update = function (collection, query, data, callback) {
+    db[collection].update(query, data, function (err, results) {
+        if (err) {
+            console.log('There was an error in db.update:', err);
+        }
+        callback (err, results);
+    });
+};
+
 exports.delete = function (collection, query, justOne, callback) {
     db[collection].remove(query, justOne, function (err, results) {
         if (err) {
