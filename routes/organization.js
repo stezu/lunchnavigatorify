@@ -18,4 +18,25 @@ router.get('/:organization', function (req, res) {
     });
 });
 
+router.put('/:organization/:type', function () {
+    var restaurant      = {},
+        restaurant.yelp = {};
+
+    restaurant.yelp.name        = req.body.name ? req.body.name : null;
+    restaurant.yelp.yelp_id     = req.body.id ? req.body.id : null;
+    restaurant.yelp.location    = req.body.location ? req.body.location : null;
+    restaurant.yelp.is_closed   = req.body.is_closed ? req.body.is_closed : null;
+    restaurant.yelp.yelp_url    = req.body.url ? req.body.url : null;
+    restaurant.yelp.image_url   = req.body.image_url ? req.body.image_url : null;
+    restaurant.yelp.yelp_rating = req.body.rating ? restaurant.body.rating : null;
+
+    db.update('organizations', { slug: req.param('organization') }, { '$push': { 'restaurants': restaurant }}, function (err, results) {
+        if (err) {
+            console.log('There was an error adding this restaurant to your organization.  Sorry mate.', err);
+        } else {
+            console.log(results);
+        }
+    });
+});
+
 module.exports = router;
