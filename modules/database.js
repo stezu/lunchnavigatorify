@@ -16,10 +16,10 @@ exports.find = function (collection, query, callback) {
     });
 };
 
-exports.saveLocation = function (location, callback) {
-    db.restaurants.save(location, function (err, results) {
+exports.save = function (collection, data, callback) {
+    db[collection].save(data, function (err, results) {
         if (err) {
-            console.log('There was an error in db.saveLocation:', err);
+            console.log('There was an error in db.save:', err);
         }
         callback (err, results);
     });

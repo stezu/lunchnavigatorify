@@ -12,7 +12,7 @@ router.get('/', function (req, res) {
 });
 
 router.post('/', function (req, res) {
-    db.saveLocation({
+    db.save('restaurants', {
         yelp: req.body
     }, function (err, results) {
         if (err) {
