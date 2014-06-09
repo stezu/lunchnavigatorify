@@ -10,18 +10,18 @@ exports.getObjectId = function (id) {
 exports.find = function (collection, query, callback) {
     db[collection].find(query, function (err, results) {
         if (err) {
-            console.log('There was an error in db.findAll:', err);
+            console.log('There was an error in db.find:', err);
         }
         callback(err, results);
     });
 };
 
 exports.saveLocation = function (location, callback) {
-    db.restaurants.save(location, function (err, saved) {
+    db.restaurants.save(location, function (err, results) {
         if (err) {
             console.log('There was an error in db.saveLocation:', err);
         }
-        callback (err, saved);
+        callback (err, results);
     });
 };
 
