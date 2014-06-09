@@ -59,9 +59,7 @@ jQuery(function($) {
         });
 
     $results.on('click touchend', '.results__list__item__delete', function () {
-        console.log('touched');
         $.ajax({
-            url: '/restaurant',
             data: {
                 id: $(this).data('id')
             },
