@@ -10,9 +10,6 @@ router.get('/', function (req, res) {
         limit: req.query.page_limit,
         location: 33612
     }, function (err, data) {
-        if (err) {
-            console.log('Yelp Error:', data);
-        }
         res.send(data);
     });
 });

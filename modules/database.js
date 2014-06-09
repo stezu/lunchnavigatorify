@@ -3,6 +3,10 @@ var config = require('../appconfig.js'),
 
 var db = mongojs(config.mongo.mongo_uri, ['restaurants']);
 
+exports.getObjectId = function (id) {
+    return mongojs.ObjectId(id);
+};
+
 exports.findAll = function (callback) {
     db.restaurants.find().toArray(function (err, results) {
         if (err) {
@@ -30,6 +34,7 @@ exports.getLocations = function (callback) {
     });
 };
 
-exports.deleteLocation = function (location) {
+exports.deleteLocation = function (location, callback) {
     db.restaurants.remove(location);
+    callback();
 };

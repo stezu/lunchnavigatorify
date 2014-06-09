@@ -29,14 +29,15 @@ router.post('/', function (req, res) {
 });
 
 router.delete('/', function (req, res) {
+    var objectId = db.getObjectId(req.body.id);
+
     db.deleteLocation({
-        '_id': {
-            '$oid': req.body.id
-        }
-    });
-    db.getLocations(function (err, results) {
-        res.render('results', {
-            locations: results
+        '_id': objectId
+    }, function () {
+        db.getLocations(function (err, results) {
+            res.render('results', {
+                locations: results
+            });
         });
     });
 });
