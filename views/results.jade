@@ -1,32 +1,31 @@
 block results
-    ul.results__list
-        if locations.length
-            ul.results__list
-                - each location in locations
-                    li.results__list__item
+    if locations.length
+        ul.results__list
+            - each location in locations
+                li.results__list__item
 
-                        if location.yelp
-                            if (location.yelp.is_closed === true)
-                                span.results__list__item__closed Closed :(
+                    if location.yelp
+                        if (location.yelp.is_closed === true)
+                            span.results__list__item__closed Closed :(
 
+                        if (location.yelp.url)
+                            a.results__list__item__yelp-link(href="#{ location.yelp.url }")
+                                if location.yelp.image_url
+                                    img.results__list__item__image(src="#{ location.yelp.image_url }")
+
+                        .results__list__item__details
                             if (location.yelp.url)
                                 a.results__list__item__yelp-link(href="#{ location.yelp.url }")
-                                    if location.yelp.image_url
-                                        img.results__list__item__image(src="#{ location.yelp.image_url }")
+                                    if location.yelp.name
+                                        span.results__list__item__name #{ location.yelp.name }
 
-                            .results__list__item__details
-                                if (location.yelp.url)
-                                    a.results__list__item__yelp-link(href="#{ location.yelp.url }")
-                                        if location.yelp.name
-                                            span.results__list__item__name #{ location.yelp.name }
+                            if (location.yelp.rating)
+                                span.results__list__item__rating #{ location.yelp.rating }
+                            if (location.yelp.phone && location.yelp.display_phone)
+                                a.results__list__item__phone(href="#{ location.yelp.phone }") #{ location.yelp.display_phone.replace('+1-', '') }
 
-                                if (location.yelp.rating)
-                                    span.results__list__item__rating #{ location.yelp.rating }
-                                if (location.yelp.phone && location.yelp.display_phone)
-                                    a.results__list__item__phone(href="#{ location.yelp.phone }") #{ location.yelp.display_phone.replace('+1-', '') }
+                            a.results__list__item__delete(href="#" data-id="#{ location._id }") X
 
-                                a.results__list__item__delete(href="#" data-id="#{ location._id }") X
-
-        else
-            .results__error
-                p It looks like you don't have any restaurants to choose from, add some to get started!
+    else
+        .results__error
+            p It looks like you don't have any restaurants to choose from, add some to get started!
