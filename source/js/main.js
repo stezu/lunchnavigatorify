@@ -9,8 +9,11 @@ jQuery(function($) {
             markup += "<td class='restaurant-image'><img src='" + restaurant.image_url + "'/></td>";
         }
         markup += "<td class='restaurant-info'><div class='restaurant-name'>" + restaurant.name + "</div>";
+        if (restaurant.location.display_address !== undefined) {
+            markup += "<div class='restaurant-address'>" + restaurant.location.display_address + "</div>";
+        }
         if (restaurant.rating !== undefined) {
-            markup += "<div class='restaurant-rating'>" + restaurant.rating + "</div>";
+            markup += "<div class='restaurant-rating'>Rating: " + restaurant.rating + "</div>";
         }
         markup += "</td></tr></table>";
         return markup;
