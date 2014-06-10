@@ -1,5 +1,6 @@
 jQuery(function($) {
-    var $form = $('.yelp-search'),
+    var $document = $(document),
+        $form = $('.yelp-search'),
         $results = $('.results');
 
     function restaurantFormatResult (restaurant) {
@@ -58,7 +59,7 @@ jQuery(function($) {
             return false;
         });
 
-    $results.on('click touchend', '.results__list__item__delete', function () {
+    $document.on('click touchend', '.results__list__item__delete', function () {
         $.ajax({
             data: {
                 id: $(this).data('id')
@@ -69,6 +70,13 @@ jQuery(function($) {
                 $results.html(results);
             }
         });
+        return false;
+    });
+
+    $document.on('click touchend', '.page-header__random', function () {
+        var $items = $results.find('.results__list__item').removeClass('selected');
+
+        $($items[Math.floor(Math.random() * $items.length)]).addClass('selected');
         return false;
     });
 });
