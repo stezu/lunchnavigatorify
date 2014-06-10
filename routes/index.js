@@ -6,10 +6,10 @@ var yelp = require('../modules/yelp');
 
 /* GET home page. */
 router.get('/', function (req, res) {
-    db.find('restaurants', {}, function (err, results) {
-        res.render('index', {
+    db.find('organizations', {}, function (err, results) {
+        res.render('home', {
             title: 'lunchnavigatorify',
-            locations: results
+            organizations: results
         });
     });
 });

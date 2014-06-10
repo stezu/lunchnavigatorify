@@ -1,0 +1,16 @@
+extends layout
+
+block content
+    header.page-header
+        h1.page-header__title= title
+
+    .welcome
+        p Welcome to lunchnavigatorify <small>name pending</small>.  Please select your organization from below, or 
+            a(href="#") add one
+
+        ul.organization__list
+            - each org in organizations
+                li.organization__list__item
+
+                    if (org.slug)
+                        a.organization__list__item__link(href="/org/#{ org.slug }")= org.name

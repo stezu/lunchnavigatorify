@@ -9,7 +9,7 @@ router.get('/:organization', function (req, res) {
             // this should send a friendly mesaage to the user that maybe triggers an alert or something
             console.log('There was an error retrieving your organization\'s restaurants.');
         } else {
-            console.log(results[0].restaurants);
+            console.log(results);
             res.render('index', {
                 title: results[0].name + ' lunch spots',
                 locations: results[0].restaurants ? results[0].restaurants : []
