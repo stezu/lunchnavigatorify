@@ -16,7 +16,8 @@
     "morgan": "~1.0.0",
     "passport": "^0.2.0",
     "static-favicon": "~1.0.0",
-    "yelp": "^0.1.1"
+    "yelp": "^0.1.1",
+    "passport-local": "^1.0.0"
   },
   "devDependencies": {
     "gulp": "~3.7.0",
