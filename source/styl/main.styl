@@ -18,6 +18,11 @@ body
     min-height 100%
     padding 0
 
+input,
+textarea
+    -webkit-appearance none
+    appearance none
+
 // ===================
 // Patterns
 // ===================
@@ -59,14 +64,25 @@ body
         padding 0
         width 98%
 
+        @media (max-width: 600px)
+            border none
+
     &__field
         float left
         font-size 16px
         outline none
         width 80%
 
+        @media (max-width: 600px)
+            float none
+            width 100%
+
         .select2-search-field
             width 100%
+
+            @media (max-width: 600px)
+                border 1px solid #ddd
+                width 100%
 
             .select2-input
                 border 0
@@ -88,6 +104,12 @@ body
             height 50px
             line-height 50px
             width 20%
+
+            @media (max-width: 600px)
+                border-radius 4px
+                float none
+                margin-top 10px
+                width 100%
 
 
 // ===================
