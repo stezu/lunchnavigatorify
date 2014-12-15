@@ -4,16 +4,16 @@ var router = express.Router();
 var db = require('../modules/database');
 
 router.get('/:organization', function (req, res) {
-    db.find('organizations', { slug: req.param('organization') }, function (err, results) {
+    db.findOne('organizations', { slug: req.param('organization') }, function (err, results) {
         if (err) {
             // this should send a friendly mesaage to the user that maybe triggers an alert or something
             console.log('There was an error retrieving your organization\'s restaurants.');
         } else {
             console.log(results);
             res.render('index', {
-                title: results[0].name + ' lunch spots',
-                zip: results[0].zip,
-                locations: results[0].restaurants ? results[0].restaurants : []
+                title: results.name + ' lunch spots',
+                zip: results.zip,
+                locations: results.restaurants ? results.restaurants : []
             });
         }
     });
