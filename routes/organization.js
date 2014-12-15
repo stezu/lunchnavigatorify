@@ -39,9 +39,9 @@ router.post('/:organization', function (req, res) {
         } else {
             console.log('Organization updated.');
 
-            db.find('organizations', { slug: req.param('organization') }, function (err, results) {
+            db.findOne('organizations', { slug: req.param('organization') }, function (err, results) {
                 res.render('results', {
-                    locations: results[0].restaurants
+                    locations: results.restaurants
                 });
             });
         }
@@ -60,9 +60,9 @@ router.delete('/:organization', function (req, res) {
         if (err) {
             console.log('There was an error deleting the location, I think?', err);
         } else {
-            db.find('organizations', { slug: req.param('organization') }, function (err, results) {
+            db.findOne('organizations', { slug: req.param('organization') }, function (err, results) {
                 res.render('results', {
-                    locations: results[0].restaurants
+                    locations: results.restaurants
                 });
             });
         }
