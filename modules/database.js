@@ -20,6 +20,15 @@ exports.find = function (collection, query, callback) {
     });
 };
 
+exports.findOne = function (collection, query, callback) {
+    db[collection].findOne(query, function (err, results) {
+        if (err) {
+            console.log('There was an error in db.findOne:', err);
+        }
+        callback(err, results);
+    });
+};
+
 exports.save = function (collection, data, callback) {
     db[collection].save(data, function (err, results) {
         if (err) {
