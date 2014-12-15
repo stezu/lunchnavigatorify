@@ -4,6 +4,8 @@ block content
     header.page-header
         h1.page-header__title= title
 
+        p.center Showing Results for Zip: #{ zip }
+
         form.yelp-search(action='/search', method='post')
             fieldset.yelp-search__inputs
                 input.yelp-search__field.yelp-search__field--text(name='restaurant', placeholder='Search for a restaurant', type='search')
