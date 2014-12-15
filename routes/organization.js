@@ -12,6 +12,7 @@ router.get('/:organization', function (req, res) {
             console.log(results);
             res.render('index', {
                 title: results[0].name + ' lunch spots',
+                zip: results[0].zip,
                 locations: results[0].restaurants ? results[0].restaurants : []
             });
         }
