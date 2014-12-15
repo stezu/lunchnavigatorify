@@ -32,6 +32,7 @@ jQuery(function($) {
                 data: function (term, page) {
                     return {
                         'restaurant': term,
+                        'location': $('.zip').text(), // this is super ugly right meow, this should be set server side, or something
                         'page_limit': 10
                     };
                 },
