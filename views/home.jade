@@ -7,6 +7,16 @@ block content
         p Welcome to lunchnavigatorify <small>name pending</small>.  Please select your organization from below, or 
             a(href="#") add one
 
+        form.org-form(action='/org/new', method='post')
+            fieldset.org-form__inputs
+                input.org-form__field(name='orgName', placeholder='Organization Name')
+
+                input.org-form__field(name='url', placeholder='Organization URL')
+
+                input.org-form__field(name='zip', placeholder='Organization Zip Code')
+
+                input.org-form__field(type='submit', value='Submit')
+
         ul.organization__list
             - each org in organizations
                 li.organization__list__item
