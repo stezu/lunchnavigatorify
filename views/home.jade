@@ -17,9 +17,6 @@ block content
 
                 input.org-form__field(type='submit', value='Submit')
 
-        ul.organization__list
-            - each org in organizations
-                li.organization__list__item
-
-                    if (org.slug)
-                        a.organization__list__item__link(href="/org/#{ org.slug }")= org.name
+        .organization
+            block organizations
+                include organizations 
