@@ -32,12 +32,15 @@ jQuery(function($) {
 
     $orgForm
         .submit(function (e) {
+            console.log();
             e.preventDefault();
 
+            // TODO validate submitted data
             $.post('/org/new', 
                 {
-                    orgName: $('orgName').val(),
-                    url: $('.')
+                    orgName: e.currentTarget[1].value,
+                    url: e.currentTarget[2].value,
+                    zip: e.currentTarget[3].value
                 });
         });
 
