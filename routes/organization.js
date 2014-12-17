@@ -69,22 +69,4 @@ router.delete('/:organization', function (req, res) {
     });
 });
 
-router.post('/new', function (req, res) {
-    if (!req.body.name) {
-        // do some error handling here
-    } else if (!req.body.url) {
-        // do some error handling here
-    } else if (!req.body.zip) {
-        // do some error handling here
-    } else {
-        db.save('organizations',
-            {
-                'name': req.body.orgName,
-                'slug': req.body.url,
-                'zip':  req.body.zip
-            }
-        );
-    }
-});
-
 module.exports = router;

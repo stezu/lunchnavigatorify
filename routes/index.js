@@ -6,26 +6,29 @@ var yelp = require('../modules/yelp');
 
 /* GET home page. */
 router.get('/', function (req, res) {
-    db.find('organizations', {}, function (err, results) {
-        res.render('home', {
-            title: 'lunchnavigatorify',
-            organizations: results
-        });
+    db.find('organizations',
+        {},
+        function (err, results) {
+            res.render('home', {
+                title: 'lunchnavigatorify',
+                organizations: results
+            });
     });
 });
 
 router.post('/', function (req, res) {
-    // Not currently being used
-    yelp.search({
-        term: req.param('lunchspot'),
-        location: 33612
-    }, function (err, data) {
-        // res.send(data.businesses);
-        res.render('results', {
-            title: 'lunchnavigatorify - yelp style',
-            locations: data.businesses
+
+    console.log('we get here', req.body);
+        
+    db.save('organizations',
+        {
+            'name': req.body.orgName,
+            'slug': req.body.url,
+            'zip':  req.body.zip
+        },
+        function (err, results) {
+            console.log(results);
         });
-    });
 });
 
 module.exports = router;

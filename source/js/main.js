@@ -27,7 +27,7 @@ jQuery(function($) {
     $('.add-org').on('click', function (e) {
         e.preventDefault();
 
-        $('.org-form').slideToggle();
+        $('.org-form').slideDown();
     });
 
     $orgForm
@@ -36,7 +36,7 @@ jQuery(function($) {
             e.preventDefault();
 
             // TODO validate submitted data
-            $.post('/org/new', 
+            $.post('/', 
                 {
                     orgName: e.currentTarget[1].value,
                     url: e.currentTarget[2].value,
