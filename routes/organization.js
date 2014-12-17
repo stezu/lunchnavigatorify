@@ -3,6 +3,26 @@ var router = express.Router();
 
 var db = require('../modules/database');
 
+router.post('/new', function (req, res) {        
+    db.save('organizations',
+        {
+            'name': req.body.orgName,
+            'slug': req.body.url,
+            'zip':  req.body.zip
+        },
+        function (err, results) {
+            console.log(results, 'was saved.');
+
+            db.find('organizations', {}, function (err, results) {
+                console.log(results);
+                res.render('organizations', {
+                    organizations: results
+                });
+            });
+        }
+    );
+});
+
 router.get('/:organization', function (req, res) {
     db.findOne('organizations', { slug: req.param('organization') }, function (err, results) {
         if (err) {
