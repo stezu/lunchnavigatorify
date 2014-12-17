@@ -16,24 +16,4 @@ router.get('/', function (req, res) {
     });
 });
 
-router.post('/', function (req, res) {        
-    db.save('organizations',
-        {
-            'name': req.body.orgName,
-            'slug': req.body.url,
-            'zip':  req.body.zip
-        },
-        function (err, results) {
-            console.log(results, 'was saved.');
-
-            db.find('organizations', {}, function (err, results) {
-                console.log(results);
-                res.render('home', {
-                    title: 'lunchnavigatorify',
-                    organizations: results
-                });
-            });
-        });
-});
-
 module.exports = router;
