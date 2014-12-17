@@ -27,21 +27,26 @@ jQuery(function($) {
     $('.add-org').on('click', function (e) {
         e.preventDefault();
 
-        $('.org-form').slideDown();
+        $orgForm.slideDown();
     });
 
     $orgForm
-        .submit(function (e) {
-            console.log();
+        .on('submit', function (e) {
             e.preventDefault();
 
             // TODO validate submitted data
-            $.post('/', 
-                {
+            $.ajax({
+                type: this.method,
+                url: this.action,
+                data: {
                     orgName: e.currentTarget[1].value,
                     url: e.currentTarget[2].value,
                     zip: e.currentTarget[3].value
-                });
+                },
+                success: function (data) {
+                    $('.organization').html(data);
+                }
+            });
         });
 
     $searchForm
