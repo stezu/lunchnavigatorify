@@ -1,6 +1,7 @@
 jQuery(function($) {
     var $document = $(document),
-        $form = $('.yelp-search'),
+        $orgForm = $('.org-form'),
+        $searchForm = $('.yelp-search'),
         $results = $('.results');
 
     function restaurantFormatResult (restaurant) {
@@ -23,7 +24,24 @@ jQuery(function($) {
         return restaurant.name;
     }
 
-    $form
+    $('.add-org').on('click', function (e) {
+        e.preventDefault();
+
+        $('.org-form').slideToggle();
+    });
+
+    $orgForm
+        .submit(function (e) {
+            e.preventDefault();
+
+            $.post('/org/new', 
+                {
+                    orgName: $('orgName').val(),
+                    url: $('.')
+                });
+        });
+
+    $searchForm
         .find('.yelp-search__field--text').select2({
             minimumInputLength: 2,
             ajax: {
@@ -47,7 +65,7 @@ jQuery(function($) {
         })
         .end()
         .submit(function() {
-            var data = $form.find('.yelp-search__field--text').select2('data');
+            var data = $searchForm.find('.yelp-search__field--text').select2('data');
 
             // If we submit an empty form, that's stupid.
             if (data !== null || data.length) {
