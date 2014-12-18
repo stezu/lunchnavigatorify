@@ -4,10 +4,10 @@ block content
     header.page-header.center
         img(src="/img/Lunchnavigatorify-logo.png")
     .welcome.content
-        p Welcome to lunchnavigatorify <small>name pending</small>.  Please select your organization from below, or 
+        p.center Welcome to lunchnavigatorify <small>name pending</small>.  Please select your organization from below, or 
             a.add-org(href="#") add one
 
-        form.org-form(action='/org/new', method='post')
+        form.org-form.center(action='/org/new', method='post')
             fieldset.org-form__inputs
                 input.org-form__field(name='orgName', placeholder='Organization Name')
 
