@@ -47,6 +47,8 @@ jQuery(function($) {
                     $('.organization').html(data);
                 }
             });
+
+            $(this).hide();
         });
 
     $searchForm
