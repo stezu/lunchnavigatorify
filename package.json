@@ -18,6 +18,7 @@
     "lodash": "~2.4.1"
   },
   "devDependencies": {
+    "gps2zip": "^1.1.0",
     "gulp": "~3.7.0",
     "gulp-autoprefixer": "0.0.7",
     "gulp-concat": "^2.2.0",

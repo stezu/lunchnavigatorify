@@ -27,6 +27,18 @@ jQuery(function($) {
     $('.add-org').on('click', function (e) {
         e.preventDefault();
 
+        navigator.geolocation.getCurrentPosition(function (location) {
+            $.ajax({
+                type: 'get',
+                url: '/location/' + location.coords.latitude + '/' + location.coords.longitude,
+                success: function (data) {
+                    $('input[name="zip"]').val(data.zip_code);
+                }
+            });
+        }, function () {
+            return;
+        });
+
         $orgForm.slideDown();
     });
 
