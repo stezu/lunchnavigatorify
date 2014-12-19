@@ -224,3 +224,32 @@ textarea
                 &::before,
                 &::after
                     background $blue
+
+.select2-results
+    background #fff
+    box-shadow 0 0 3px rgba(0, 0, 0, 0.2)
+    list-style none
+    margin 0
+    padding 0
+    width auto
+
+    li
+        border-bottom 1px solid #eee
+        padding 10px
+
+    &:last-child
+        border-bottom none
+
+    .restaurant
+        color #999
+        overflow hidden // clearfix
+
+        &__image
+            float left
+            margin-right 15px
+            width 75px
+
+        &__name
+            color #333
+            margin 0 0 5px
+                

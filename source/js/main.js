@@ -4,26 +4,6 @@ jQuery(function($) {
         $searchForm = $('.yelp-search'),
         $results = $('.results');
 
-    function restaurantFormatResult (restaurant) {
-        var markup = "<table class='restaurant-result'><tr>";
-        if (restaurant.image_url !== undefined) {
-            markup += "<td class='restaurant-image'><img src='" + restaurant.image_url + "'/></td>";
-        }
-        markup += "<td class='restaurant-info'><div class='restaurant-name'>" + restaurant.name + "</div>";
-        if (restaurant.location.display_address !== undefined) {
-            markup += "<div class='restaurant-address'>" + restaurant.location.display_address + "</div>";
-        }
-        if (restaurant.rating !== undefined) {
-            markup += "<div class='restaurant-rating'>Rating: " + restaurant.rating + "</div>";
-        }
-        markup += "</td></tr></table>";
-        return markup;
-    }
-
-    function restaurantFormatSelection (restaurant) {
-        return restaurant.name;
-    }
-
     $('.add-org').on('click', function (e) {
         e.preventDefault();
 
@@ -78,10 +58,28 @@ jQuery(function($) {
                     return {results: data.businesses};
                 }
             },
-            formatResult: restaurantFormatResult, // omitted for brevity, see the source of this page
-            formatSelection: restaurantFormatSelection,  // omitted for brevity, see the source of this page
-            dropdownCssClass: "bigdrop", // apply css that makes the dropdown taller
-            escapeMarkup: function (m) { return m; } // we do not want to escape markup since we are displaying html in results
+            formatResult: function (restaurant) {
+                var markup = '<div class="restaurant">';
+                if (restaurant.image_url !== undefined) {
+                    markup += '<img class="restaurant__image" src="' + restaurant.image_url + '">';
+                }
+                markup += '<div class="restaurant__info"><h3 class="restaurant__name">' + restaurant.name + '</div>';
+                if (restaurant.location.display_address !== undefined) {
+                    markup += '<div class="restaurant__address">' + restaurant.location.display_address + '</div>';
+                }
+                if (restaurant.rating !== undefined) {
+                    markup += '<div class="restaurant__rating">Rating: ' + restaurant.rating + '</div>';
+                }
+                markup += '</div>';
+                return markup;
+            },
+            formatSelection: function (restaurant) {
+                return restaurant.name;
+            },
+            dropdownCssClass: "bigdrop",
+            escapeMarkup: function (m) {
+                return m;
+            }
         })
         .end()
         .submit(function() {
