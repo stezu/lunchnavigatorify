@@ -29,12 +29,8 @@ jQuery(function($) {
 
         navigator.geolocation.getCurrentPosition(function (location) {
             $.ajax({
-                type: 'post',
-                url: '/loc/getzip',
-                data: {
-                    lat: location.coords.latitude,
-                    lon: location.coords.longitude
-                },
+                type: 'get',
+                url: '/location/' + location.coords.latitude + '/' + location.coords.longitude,
                 success: function (data) {
                     $('input[name="zip"]').val(data.zip_code);
                 }

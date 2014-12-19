@@ -3,8 +3,8 @@ var router = express.Router();
 
 var zip = require('../modules/gps2zip');
 
-router.post('/getzip', function (req, res) {
-    res.send(zip(req.body.lat, req.body.lon));
+router.get('/:latitude/:longitude', function (req, res) {
+    res.send(zip(req.param('latitude'), req.param('longitude')));
 });
 
 module.exports = router;
