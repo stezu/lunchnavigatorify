@@ -39,7 +39,7 @@ jQuery(function($) {
                     $('input[name="zip"]').val(data.zip_code);
                 }
             });
-        }, function (){
+        }, function () {
             return;
         });
 
