@@ -1,15 +1,8 @@
 var express = require('express');
 var router = express.Router();
-var passport = require('passport');
 
 var db = require('../modules/database');
-
-function ensureAuthenticated (req, res, next) {
-    if (req.isAuthenticated()) { return next(); }
-    req.session.returnTo = req.originalUrl;
-
-    res.redirect('/login/google');
-}
+var auth = require('../modules/auth');
 
 router.post('/new', function (req, res) {        
     db.save('organizations',
@@ -31,7 +24,7 @@ router.post('/new', function (req, res) {
     );
 });
 
-router.get('/:organization', ensureAuthenticated, function (req, res) {
+router.get('/:organization', auth.ensure, function (req, res) {
     db.findOne('organizations', { slug: req.param('organization') }, function (err, results) {
         if (err) {
             // this should send a friendly mesaage to the user that maybe triggers an alert or something

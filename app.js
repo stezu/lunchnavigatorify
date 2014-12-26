@@ -5,8 +5,6 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var passport = require('passport');
-var GoogleStrategy = require('passport-google').Strategy;
 
 var routes = require('./routes/index');
 var search = require('./routes/search');
@@ -15,6 +13,8 @@ var users = require('./routes/users');
 var org = require('./routes/organization');
 var location = require('./routes/location');
 var login = require('./routes/login');
+
+var auth = require('./modules/auth').init();
 
 var app = express();
 
@@ -32,8 +32,8 @@ app.use(session({
     resave: false,
     saveUninitialized: true
 }));
-app.use(passport.initialize());
-app.use(passport.session());
+app.use(auth.initialize());
+app.use(auth.session());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
@@ -44,26 +44,6 @@ app.use('/org', org);
 app.use('/location', location);
 app.use('/login', login);
 
-passport.use(new GoogleStrategy({
-    returnURL: 'http://localhost:3000/login/google/return',
-    realm: 'http://localhost:3000/'
-  },
-  function(identifier, profile, done) {
-    console.log(identifier, profile, done);
-    return done(false, {
-        un: 'peppy',
-        pw: 'gonzalez'
-    });
-  }
-));
-
-passport.serializeUser(function(user, done) {
-  done(null, user);
-});
-
-passport.deserializeUser(function(user, done) {
-  done(null, user);
-});
 
 /// catch 404 and forward to error handler
 app.use(function(req, res, next) {
