@@ -8,6 +8,8 @@ router.get('/', function (req, res) {
 
 router.get('/google', passport.authenticate('google'));
 
-router.get('/google/return', passport.authenticate('google', { successRedirect: '/', failureRedirect: '/login' }));
+router.get('/google/return', passport.authenticate('google'), function (req, res) {
+	res.redirect(req.session.returnTo || '/');
+});
 
 module.exports = router;
