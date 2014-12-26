@@ -4,6 +4,8 @@ var router = express.Router();
 var db = require('../modules/database');
 var auth = require('../modules/auth');
 
+router.use(auth.ensure);
+
 router.post('/new', function (req, res) {        
     db.save('organizations',
         {
@@ -24,7 +26,7 @@ router.post('/new', function (req, res) {
     );
 });
 
-router.get('/:organization', auth.ensure, function (req, res) {
+router.get('/:organization', function (req, res) {
     db.findOne('organizations', { slug: req.param('organization') }, function (err, results) {
         if (err) {
             // this should send a friendly mesaage to the user that maybe triggers an alert or something
