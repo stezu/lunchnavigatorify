@@ -14,10 +14,9 @@
     "lodash": "~2.4.1",
     "mongojs": "~0.13.0",
     "morgan": "~1.0.0",
-    "passport": "^0.2.0",
+    "passport": "^0.2.1",
     "static-favicon": "~1.0.0",
-    "yelp": "^0.1.1",
-    "passport-local": "^1.0.0"
+    "yelp": "^0.1.1"
   },
   "devDependencies": {
     "gps2zip": "^1.1.0",
