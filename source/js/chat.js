@@ -8,6 +8,8 @@
 
 		init: function () {
 
+			// any initialization steps necessary for chat goes here
+
 			socketio.init();
 
 		},
