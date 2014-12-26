@@ -2,6 +2,9 @@ var express = require('express');
 var router = express.Router();
 
 var db = require('../modules/database');
+var auth = require('../modules/auth');
+
+router.use(auth.ensure);
 
 router.post('/new', function (req, res) {        
     db.save('organizations',
