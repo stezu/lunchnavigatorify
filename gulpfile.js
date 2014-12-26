@@ -30,9 +30,9 @@ gulp.task('stylus', function () {
 });
 
 gulp.task('server', function () {
-    var server = require('./app');
+    var app = require('./app');
 
-    server.listen(3000, function () {
+    app.listen(3000, function () {
         console.log('Web server running on localhost:3000');
     });
 });
