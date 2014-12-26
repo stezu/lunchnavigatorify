@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var passport = require('passport');
 
 var db = require('../modules/database');
 
@@ -23,7 +24,7 @@ router.post('/new', function (req, res) {
     );
 });
 
-router.get('/:organization', function (req, res) {
+router.get('/:organization', passport.authenticate('google'), function (req, res) {
     db.findOne('organizations', { slug: req.param('organization') }, function (err, results) {
         if (err) {
             // this should send a friendly mesaage to the user that maybe triggers an alert or something

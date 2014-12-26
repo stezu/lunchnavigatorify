@@ -4,6 +4,8 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var passport = require('passport');
+var GoogleStrategy = require('passport-google').Strategy;
 
 var routes = require('./routes/index');
 var search = require('./routes/search');
@@ -11,6 +13,7 @@ var restaurant = require('./routes/restaurant');
 var users = require('./routes/users');
 var org = require('./routes/organization');
 var location = require('./routes/location');
+var login = require('./routes/login');
 
 var app = express();
 
@@ -23,6 +26,7 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(cookieParser());
+app.use(passport.initialize());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
@@ -31,6 +35,27 @@ app.use('/restaurant', restaurant);
 app.use('/users', users);
 app.use('/org', org);
 app.use('/location', location);
+
+passport.use(new GoogleStrategy({
+    returnURL: 'http://localhost:3000/login/google/return',
+    realm: 'http://localhost:3000/'
+  },
+  function(identifier, profile, done) {
+    console.log(identifier, profile, done);
+    return done(false, {
+        un: 'peppy',
+        pw: 'gonzalez'
+    });
+  }
+));
+
+passport.serializeUser(function(user, done) {
+  done(null, user);
+});
+
+passport.deserializeUser(function(user, done) {
+  done(null, user);
+});
 
 /// catch 404 and forward to error handler
 app.use(function(req, res, next) {
