@@ -1,4 +1,5 @@
 var express = require('express');
+var session = require('express-session');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
@@ -26,7 +27,13 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(cookieParser());
+app.use(session({
+    secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: true
+}));
 app.use(passport.initialize());
+app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
@@ -35,6 +42,7 @@ app.use('/restaurant', restaurant);
 app.use('/users', users);
 app.use('/org', org);
 app.use('/location', location);
+app.use('/login', login);
 
 passport.use(new GoogleStrategy({
     returnURL: 'http://localhost:3000/login/google/return',
