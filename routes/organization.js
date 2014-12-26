@@ -45,16 +45,16 @@ router.get('/:organization', function (req, res) {
 router.post('/:organization', function (req, res) {
     var restaurant = {
             _id: db.makeObjectId(),
-            yelp: {}
+            yelp: {
+                name:      req.body.name ? req.body.name : null,
+                id:        req.body.id ? req.body.id : null,
+                location:  req.body.location ? req.body.location : null,
+                is_closed: req.body.is_closed ? req.body.is_closed : null,
+                url:       req.body.url ? req.body.url : null,
+                image_url: req.body.image_url ? req.body.image_url : null,
+                rating:    req.body.rating ? req.body.rating : null
+            }
         };
-
-    restaurant.yelp.name        = req.body.name ? req.body.name : null;
-    restaurant.yelp.id          = req.body.id ? req.body.id : null;
-    restaurant.yelp.location    = req.body.location ? req.body.location : null;
-    restaurant.yelp.is_closed   = req.body.is_closed ? req.body.is_closed : null;
-    restaurant.yelp.url         = req.body.url ? req.body.url : null;
-    restaurant.yelp.image_url   = req.body.image_url ? req.body.image_url : null;
-    restaurant.yelp.rating      = req.body.rating ? req.body.rating : null;
 
     db.update('organizations', { slug: req.param('organization') }, { '$push': { 'restaurants': restaurant }}, function (err, results) {
         if (err) {
