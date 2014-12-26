@@ -1,16 +1,22 @@
 extends layout
 
 block content
-    header.page-header
-        h1.page-header__title= title
+    header.page-header.center
+        img(src="/img/Lunchnavigatorify-logo.png")
+    .welcome.content
+        p.center Welcome to lunchnavigatorify <small>name pending</small>.  Please select your organization from below, or 
+            a.add-org(href="#") add one
 
-    .welcome
-        p Welcome to lunchnavigatorify <small>name pending</small>.  Please select your organization from below, or 
-            a(href="#") add one
+        form.org-form.center(action='/org/new', method='post')
+            fieldset.org-form__inputs
+                input.org-form__field(name='orgName', placeholder='Organization Name')
 
-        ul.organization__list
-            - each org in organizations
-                li.organization__list__item
+                input.org-form__field(name='url', placeholder='Organization URL')
 
-                    if (org.slug)
-                        a.organization__list__item__link(href="/org/#{ org.slug }")= org.name
+                input.org-form__field(name='zip', placeholder='Organization Zip Code')
+
+                input.org-form__field(type='submit', value='Submit')
+
+        .organization
+            block organizations
+                include organizations 

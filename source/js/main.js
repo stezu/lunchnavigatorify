@@ -1,29 +1,47 @@
 jQuery(function($) {
     var $document = $(document),
-        $form = $('.yelp-search'),
+        $orgForm = $('.org-form'),
+        $searchForm = $('.yelp-search'),
         $results = $('.results');
 
-    function restaurantFormatResult (restaurant) {
-        var markup = "<table class='restaurant-result'><tr>";
-        if (restaurant.image_url !== undefined) {
-            markup += "<td class='restaurant-image'><img src='" + restaurant.image_url + "'/></td>";
-        }
-        markup += "<td class='restaurant-info'><div class='restaurant-name'>" + restaurant.name + "</div>";
-        if (restaurant.location.display_address !== undefined) {
-            markup += "<div class='restaurant-address'>" + restaurant.location.display_address + "</div>";
-        }
-        if (restaurant.rating !== undefined) {
-            markup += "<div class='restaurant-rating'>Rating: " + restaurant.rating + "</div>";
-        }
-        markup += "</td></tr></table>";
-        return markup;
-    }
+    $('.add-org').on('click', function (e) {
+        e.preventDefault();
 
-    function restaurantFormatSelection (restaurant) {
-        return restaurant.name;
-    }
+        navigator.geolocation.getCurrentPosition(function (location) {
+            $.ajax({
+                type: 'get',
+                url: '/location/' + location.coords.latitude + '/' + location.coords.longitude,
+                success: function (data) {
+                    $('input[name="zip"]').val(data.zip_code);
+                }
+            });
+        });
 
-    $form
+        $orgForm.slideDown();
+    });
+
+    $orgForm
+        .on('submit', function (e) {
+            e.preventDefault();
+
+            // TODO validate submitted data
+            $.ajax({
+                type: this.method,
+                url: this.action,
+                data: {
+                    orgName: e.currentTarget[1].value,
+                    url: e.currentTarget[2].value,
+                    zip: e.currentTarget[3].value
+                },
+                success: function (data) {
+                    $('.organization').html(data);
+                }
+            });
+
+            $(this).hide();
+        });
+
+    $searchForm
         .find('.yelp-search__field--text').select2({
             minimumInputLength: 2,
             ajax: {
@@ -32,6 +50,7 @@ jQuery(function($) {
                 data: function (term, page) {
                     return {
                         'restaurant': term,
+                        'location': $('.zip').text(), // this is super ugly right meow, this should be set server side, or something
                         'page_limit': 10
                     };
                 },
@@ -39,14 +58,32 @@ jQuery(function($) {
                     return {results: data.businesses};
                 }
             },
-            formatResult: restaurantFormatResult, // omitted for brevity, see the source of this page
-            formatSelection: restaurantFormatSelection,  // omitted for brevity, see the source of this page
-            dropdownCssClass: "bigdrop", // apply css that makes the dropdown taller
-            escapeMarkup: function (m) { return m; } // we do not want to escape markup since we are displaying html in results
+            formatResult: function (restaurant) {
+                var markup = '<div class="restaurant">';
+                if (restaurant.image_url !== undefined) {
+                    markup += '<img class="restaurant__image" src="' + restaurant.image_url + '">';
+                }
+                markup += '<div class="restaurant__info"><h3 class="restaurant__name">' + restaurant.name + '</div>';
+                if (restaurant.location.display_address !== undefined) {
+                    markup += '<div class="restaurant__address">' + restaurant.location.display_address + '</div>';
+                }
+                if (restaurant.rating !== undefined) {
+                    markup += '<div class="restaurant__rating">Rating: ' + restaurant.rating + '</div>';
+                }
+                markup += '</div>';
+                return markup;
+            },
+            formatSelection: function (restaurant) {
+                return restaurant.name;
+            },
+            dropdownCssClass: "bigdrop",
+            escapeMarkup: function (m) {
+                return m;
+            }
         })
         .end()
         .submit(function() {
-            var data = $form.find('.yelp-search__field--text').select2('data');
+            var data = $searchForm.find('.yelp-search__field--text').select2('data');
 
             // If we submit an empty form, that's stupid.
             if (data !== null || data.length) {

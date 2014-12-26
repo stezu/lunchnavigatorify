@@ -3,16 +3,37 @@ var router = express.Router();
 
 var db = require('../modules/database');
 
+router.post('/new', function (req, res) {        
+    db.save('organizations',
+        {
+            'name': req.body.orgName,
+            'slug': req.body.url,
+            'zip':  req.body.zip
+        },
+        function (err, results) {
+            console.log(results, 'was saved.');
+
+            db.find('organizations', {}, function (err, results) {
+                console.log(results);
+                res.render('organizations', {
+                    organizations: results
+                });
+            });
+        }
+    );
+});
+
 router.get('/:organization', function (req, res) {
-    db.find('organizations', { slug: req.param('organization') }, function (err, results) {
+    db.findOne('organizations', { slug: req.param('organization') }, function (err, results) {
         if (err) {
             // this should send a friendly mesaage to the user that maybe triggers an alert or something
             console.log('There was an error retrieving your organization\'s restaurants.');
         } else {
             console.log(results);
             res.render('index', {
-                title: results[0].name + ' lunch spots',
-                locations: results[0].restaurants ? results[0].restaurants : []
+                title: results.name + ' lunch spots',
+                zip: results.zip,
+                locations: results.restaurants ? results.restaurants : []
             });
         }
     });
@@ -38,9 +59,9 @@ router.post('/:organization', function (req, res) {
         } else {
             console.log('Organization updated.');
 
-            db.find('organizations', { slug: req.param('organization') }, function (err, results) {
+            db.findOne('organizations', { slug: req.param('organization') }, function (err, results) {
                 res.render('results', {
-                    locations: results[0].restaurants
+                    locations: results.restaurants
                 });
             });
         }
@@ -59,9 +80,9 @@ router.delete('/:organization', function (req, res) {
         if (err) {
             console.log('There was an error deleting the location, I think?', err);
         } else {
-            db.find('organizations', { slug: req.param('organization') }, function (err, results) {
+            db.findOne('organizations', { slug: req.param('organization') }, function (err, results) {
                 res.render('results', {
-                    locations: results[0].restaurants
+                    locations: results.restaurants
                 });
             });
         }

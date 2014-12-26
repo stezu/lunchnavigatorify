@@ -4,10 +4,11 @@ var router = express.Router();
 var yelp = require('../modules/yelp');
 
 router.get('/', function (req, res) {
+    console.log(req.query.location);
     yelp.search({
         term: req.query.restaurant,
-        limit: req.query.page_limit,
-        location: 33612
+        location: req.query.location,
+        limit: req.query.page_limit
     }, function (err, data) {
         res.send(data);
     });
