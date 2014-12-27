@@ -120,5 +120,4 @@ jQuery(function($) {
         return false;
     });
 
-    window.group.init();
 });

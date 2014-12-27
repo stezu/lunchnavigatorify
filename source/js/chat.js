@@ -1,10 +1,6 @@
 var socketio = require('./socketio');
 
-"use strict";
-
 var chat = {
-
-	$app: $('.app'),
 
 	init: function () {
 

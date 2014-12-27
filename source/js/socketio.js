@@ -1,10 +1,10 @@
 var chat = require('./chat');
-	
-"use strict";
 
 var socketio = {
 
 	init: function () {
+
+		console.log('this happens');
 
 		var socket = io.connect("http://localhost");
 

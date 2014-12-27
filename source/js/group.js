@@ -1,7 +1,5 @@
 var chat = require('./chat');
 
-"use strict";
-
 $(document).load(function () {
 
 	chat.init();
