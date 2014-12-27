@@ -16,7 +16,9 @@ var login = require('./routes/login');
 
 var auth = require('./modules/auth').init();
 
-var app = express();
+var app = express(),
+    server = require('http').Server(app),
+    io = require('./modules/chatSocket').init(server);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -76,4 +78,4 @@ app.use(function(err, req, res, next) {
     });
 });
 
-module.exports = app;
+module.exports = server;

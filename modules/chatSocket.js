@@ -2,23 +2,28 @@
 
 var Users = require('./users');
 
-module.exports = function (server) {
+var chatSocket = {
 
-	var io = require('socket.io').listen(server);
+	init: function (server) {
 
-	io.on('connection', function (socket) {
+		var io = require('socket.io')(server);
 
-		console.log("There has been a new socket connection", socket);
+		io.on('connection', function (socket) {
 
-		// emit the users as soon as someone makes a new connection
-		io.sockets.emit('users updated', Users.userList);
+			console.log("There has been a new socket connection", socket);
 
-		socket.on('new user', function (user) {
-			Users.addUser(user);
+			// emit the users as soon as someone makes a new connection
+			io.sockets.emit('users updated', Users.userList);
+
+			socket.on('new user', function (user) {
+				Users.addUser(user);
+			});
+
 		});
 
-	});
-
-	return io;
+		return io;
+	}
 
 };
+
+module.exports = chatSocket;
