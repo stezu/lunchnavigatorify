@@ -1,8 +1,20 @@
-var chat = require('./chat'),
-	$ = window.$;
+(function ($, socketio, chat) {
+	
+	"use strict";
 
-$(document).load(function () {
+	var group = {
 
-	chat.init();
+		init: function () {
 
-});
+			chat.init();
+
+		}
+	};
+
+	window.group = group;
+
+}(
+	jQuery,
+	window.socketio,
+	window.chat
+));

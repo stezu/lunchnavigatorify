@@ -13,7 +13,7 @@ gulp.task('build-js', function () {
     var concat = require('gulp-concat'), 
         uglify = require('gulp-uglify');
 
-    gulp.src('./source/js/main.js')
+    gulp.src('./source/js/*.js')
         .pipe(concat('main.min.js'))
         // .pipe(uglify())
         .pipe(gulp.dest('./public/js'));
