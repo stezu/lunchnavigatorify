@@ -1,24 +1,20 @@
-(function (chat) {
+var chat = require('./chat');
 	
-	"use strict";
+"use strict";
 
-	var socketio = {
+var socketio = {
 
-		init: function () {
+	init: function () {
 
-			var socket = io.connect("http://localhost");
+		var socket = io.connect("http://localhost");
 
-			// listen for when the server updates
-			// the list of current users
-			socket.on('users updated', function (users) {
-				chat.updateUserList(users);
-			});
-		}
+		// listen for when the server updates
+		// the list of current users
+		socket.on('users updated', function (users) {
+			chat.updateUserList(users);
+		});
+	}
 
-	};
+};
 
-	window.socketio = socketio;
-
-}(
-	window.chat
-));
+module.exports = socketio;

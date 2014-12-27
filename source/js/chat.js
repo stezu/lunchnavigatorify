@@ -1,35 +1,30 @@
-(function ($, socketio) {
+var socketio = require('./socketio');
 
-	"use strict";
+"use strict";
 
-	var chat = {
+var chat = {
 
-		$app: $('.app'),
+	$app: $('.app'),
 
-		init: function () {
+	init: function () {
 
-			// any initialization steps necessary for chat goes here
+		// any initialization steps necessary for chat goes here
 
-			window.socketio.init();
+		socketio.init();
 
-		},
+	},
 
-		updateUserList: function (users) {
+	updateUserList: function (users) {
 
-			var $userList = $('.current-users');
+		var $userList = $('.current-users');
 
-			$userList.empty();
+		$userList.empty();
 
-			for (var i = 0, len = users.length; i < len; i ++) {
-				$userList.append('<li>' + users[i].name + '</li>');
-			}
+		for (var i = 0, len = users.length; i < len; i ++) {
+			$userList.append('<li>' + users[i].name + '</li>');
 		}
+	}
 
-	};
+};
 
-	window.chat = chat;
-
-}(
-	jQuery,
-	window.socketio
-));
+module.exports = chat;
