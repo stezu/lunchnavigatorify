@@ -1,4 +1,5 @@
-var chat = require('./chat');
+var chat = require('./chat'),
+	$ = window.$;
 
 $(document).load(function () {
 

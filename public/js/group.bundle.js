@@ -27,25 +27,14 @@ var chat = {
 module.exports = chat;
 
 },{"./socketio":3}],2:[function(require,module,exports){
-var chat = require('./chat');
+var chat = require('./chat'),
+	$ = window.$;
 
 $(document).load(function () {
 
 	chat.init();
 
 });
-
-// var group = {
-
-// 	init: function () {
-
-// 		chat.init();
-
-// 	}
-
-// };
-
-module.exports = group;
 
 },{"./chat":1}],3:[function(require,module,exports){
 var chat = require('./chat');
