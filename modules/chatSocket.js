@@ -10,7 +10,7 @@ var chatSocket = {
 
 		io.on('connection', function (socket) {
 
-			console.log("There has been a new socket connection", socket);
+			console.log("There has been a new socket connection");
 
 			// emit the users as soon as someone makes a new connection
 			io.sockets.emit('users updated', Users.userList);

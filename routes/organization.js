@@ -6,7 +6,7 @@ var auth = require('../modules/auth');
 
 router.use(auth.ensure);
 
-router.post('/new', function (req, res) {        
+router.post('/new', function (req, res) {
     db.save('organizations',
         {
             'name': req.body.orgName,
