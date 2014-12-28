@@ -13,10 +13,13 @@ var users = require('./routes/users');
 var org = require('./routes/organization');
 var location = require('./routes/location');
 var login = require('./routes/login');
+var group = require('./routes/group');
 
 var auth = require('./modules/auth').init();
 
-var app = express();
+var app = express(),
+    server = require('http').Server(app),
+    io = require('./modules/chatSocket').init(server);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -43,7 +46,7 @@ app.use('/users', users);
 app.use('/org', org);
 app.use('/location', location);
 app.use('/login', login);
-
+app.use('/group', group);
 
 /// catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -76,5 +79,4 @@ app.use(function(err, req, res, next) {
     });
 });
 
-
-module.exports = app;
+module.exports = server;

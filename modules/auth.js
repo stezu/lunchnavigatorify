@@ -7,7 +7,7 @@ exports.init = function () {
             realm: 'http://localhost:3000/'
         },
         function(identifier, profile, done) {
-            console.log(identifier, profile, done);
+            // console.log(identifier, profile, done);
 
             return done(false, {
                 un: 'peppy',

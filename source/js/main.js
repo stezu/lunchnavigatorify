@@ -119,4 +119,7 @@ jQuery(function($) {
         $($items[Math.floor(Math.random() * $items.length)]).addClass('selected');
         return false;
     });
+
+    window.chat.init();
+
 });

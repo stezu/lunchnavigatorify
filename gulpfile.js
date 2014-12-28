@@ -15,7 +15,7 @@ gulp.task('build-js', function () {
 
     gulp.src('./source/js/*.js')
         .pipe(concat('main.min.js'))
-        .pipe(uglify())
+        // .pipe(uglify())
         .pipe(gulp.dest('./public/js'));
 });
 
