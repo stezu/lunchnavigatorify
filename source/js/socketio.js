@@ -4,7 +4,7 @@
 
 	var socketio = {
 
-		socket: io.connect("http://localhost"),
+		socket: io.connect(location.origin),
 
 		init: function () {
 

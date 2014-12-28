@@ -1,10 +1,11 @@
+var config = require('../appconfig.js');
 var passport = require('passport');
 var GoogleStrategy = require('passport-google').Strategy;
 
 exports.init = function () {
     passport.use(new GoogleStrategy({
-            returnURL: 'http://localhost:3000/login/google/return',
-            realm: 'http://localhost:3000/'
+            returnURL: config.appUrl + '/login/google/return',
+            realm: config.appUrl
         },
         function(identifier, profile, done) {
             // console.log(identifier, profile, done);

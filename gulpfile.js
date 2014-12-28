@@ -33,7 +33,7 @@ gulp.task('server', function () {
     var app = require('./app');
 
     app.listen(3000, function () {
-        console.log('Web server running on localhost:3000');
+        console.log('Web server running on port 3000');
     });
 });
 
