@@ -4,13 +4,13 @@
 
 	var socketio = {
 
-		init: function () {
+		socket: io.connect("http://localhost"),
 
-			var socket = io.connect("http://localhost");
+		init: function () {
 
 			// listen for when the server updates
 			// the list of current users
-			socket.on('users updated', function (users) {
+			this.socket.on('users updated', function (users) {
 				chat.updateUserList(users);
 			});
 		}
