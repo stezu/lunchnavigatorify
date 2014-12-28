@@ -10,7 +10,7 @@
 
 			// any initialization steps necessary for chat goes here
 
-			socketio.init();
+			window.socketio.init();
 
 		},
 

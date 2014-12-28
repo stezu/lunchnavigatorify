@@ -120,4 +120,6 @@ jQuery(function($) {
         return false;
     });
 
+    window.chat.init();
+
 });
