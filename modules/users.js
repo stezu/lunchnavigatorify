@@ -4,10 +4,12 @@ var users = {
 
 	userList: [],
 
-	addUser: function (user) {
-		userList.push(user);
+	addUser: function (user, cb) {
+		this.userList.push(user);
 
-		return userList;
+		console.log('addUser has been called', user);
+
+		cb(this.userList);
 	}
 
 };

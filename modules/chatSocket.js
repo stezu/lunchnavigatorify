@@ -16,7 +16,13 @@ var chatSocket = {
 			io.sockets.emit('users updated', Users.userList);
 
 			socket.on('new user', function (user) {
-				Users.addUser(user);
+				Users.addUser(user, function (userList) {
+					io.sockets.emit('users updated', userList);
+				});
+			});
+
+			socket.on('new message', function (data) {
+				io.sockets.emit('apply new message', data);
 			});
 
 		});

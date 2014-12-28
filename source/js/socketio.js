@@ -13,6 +13,10 @@
 			this.socket.on('users updated', function (users) {
 				chat.updateUserList(users);
 			});
+
+			this.socket.on('apply new message', function (data) {
+				chat.addMessage(data);
+			});
 		}
 
 	};
