@@ -1,17 +1,19 @@
-"use strict";
+var users = (function () {
+    "use strict";
 
-var users = {
+    return {
 
-    userList: [],
+        userList: [],
 
-    addUser: function (user, cb) {
-        this.userList.push(user);
+        addUser: function (user, cb) {
+            this.userList.push(user);
 
-        console.log('addUser has been called', user);
+            console.log('addUser has been called', user);
 
-        cb(this.userList);
-    }
+            cb(this.userList);
+        }
+    };
 
-};
+}());
 
 module.exports = users;
