@@ -9,12 +9,9 @@ exports.init = function () {
             callbackURL: config.appUrl + 'login/google/callback',
         },
         function(accessToken, refreshToken, profile, done) {
-            console.log(accessToken, refreshToken, profile, done);
+            // console.log(accessToken, refreshToken, profile, done);
 
-            return done(false, {
-                un: 'peppy',
-                pw: 'gonzalez'
-            });
+            return done(null, profile);
         }
     ));
 
