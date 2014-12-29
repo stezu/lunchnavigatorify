@@ -30,7 +30,20 @@ gulp.task('stylus', function () {
 });
 
 gulp.task('server', function () {
-    var app = require('./app');
+    var nodemon = require('gulp-nodemon');
+
+    nodemon({
+        script: 'app.js',
+        ext: 'html js',
+        ignore: [
+            '.git',
+            'node_modules/**/node_modules'
+        ]
+    })
+    .on('change', ['lint'])
+    .on('restart', function () {
+        console.log('nodemon restarted server.');
+    });
 });
 
 gulp.task('watch', function () {
