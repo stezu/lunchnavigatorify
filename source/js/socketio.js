@@ -1,28 +1,28 @@
 (function (chat) {
-	
-	"use strict";
+    
+    "use strict";
 
-	var socketio = {
+    var socketio = {
 
-		socket: io.connect(location.origin),
+        socket: io.connect(location.origin),
 
-		init: function () {
+        init: function () {
 
-			// listen for when the server updates
-			// the list of current users
-			this.socket.on('users updated', function (users) {
-				chat.updateUserList(users);
-			});
+            // listen for when the server updates
+            // the list of current users
+            this.socket.on('users updated', function (users) {
+                chat.updateUserList(users);
+            });
 
-			this.socket.on('apply new message', function (data) {
-				chat.addMessage(data);
-			});
-		}
+            this.socket.on('apply new message', function (data) {
+                chat.addMessage(data);
+            });
+        }
 
-	};
+    };
 
-	window.socketio = socketio;
+    window.socketio = socketio;
 
 }(
-	window.chat
+    window.chat
 ));

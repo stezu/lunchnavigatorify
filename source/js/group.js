@@ -1,20 +1,20 @@
 (function ($, socketio, chat) {
-	
-	"use strict";
+    
+    "use strict";
 
-	var group = {
+    var group = {
 
-		init: function () {
+        init: function () {
 
-			chat.init();
+            chat.init();
 
-		}
-	};
+        }
+    };
 
-	window.group = group;
+    window.group = group;
 
 }(
-	jQuery,
-	window.socketio,
-	window.chat
+    jQuery,
+    window.socketio,
+    window.chat
 ));
