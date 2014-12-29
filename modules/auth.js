@@ -1,14 +1,15 @@
 var config = require('../appconfig.js');
 var passport = require('passport');
-var GoogleStrategy = require('passport-google').Strategy;
+var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 
 exports.init = function () {
     passport.use(new GoogleStrategy({
-            returnURL: config.appUrl + '/login/google/return',
-            realm: config.appUrl
+            clientID: config.google.clientID,
+            clientSecret: config.google.clientSecret,
+            callbackURL: config.appUrl + 'login/google/callback',
         },
-        function(identifier, profile, done) {
-            // console.log(identifier, profile, done);
+        function(accessToken, refreshToken, profile, done) {
+            console.log(accessToken, refreshToken, profile, done);
 
             return done(false, {
                 un: 'peppy',
