@@ -79,4 +79,9 @@ app.use(function(err, req, res, next) {
     });
 });
 
+// listen on port 3000
+server.listen(3000, function () {
+    console.log('Web server running on port 3000');
+});
+
 module.exports = server;

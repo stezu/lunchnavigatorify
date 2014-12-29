@@ -31,10 +31,6 @@ gulp.task('stylus', function () {
 
 gulp.task('server', function () {
     var app = require('./app');
-
-    app.listen(3000, function () {
-        console.log('Web server running on port 3000');
-    });
 });
 
 gulp.task('watch', function () {
