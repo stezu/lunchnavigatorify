@@ -34,7 +34,7 @@ var auth = (function () {
             if (req.isAuthenticated()) { return next(); }
             req.session.returnTo = req.originalUrl;
 
-            res.redirect('/login/google');
+            res.redirect(config.appUrl + 'login/google');
         }
     };
 }());
