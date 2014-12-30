@@ -26,8 +26,12 @@ var auth = (function () {
                             refreshToken: refreshToken,
                             provider: 'google',
                             providerId: profile.id,
-                            displayName: profile.displayName,
-                            email: profile.emails[0].value
+                            email: profile.emails[0].value,
+                            name: {
+                                display: profile.displayName,
+                                first: profile.name.givenName,
+                                last: profile.name.familyName
+                            }
                         },
                         new: true,
                         upsert: true

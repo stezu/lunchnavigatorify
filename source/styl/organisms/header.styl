@@ -1,12 +1,33 @@
 .site-header
+	cf()
 	background rgba(255, 255, 255, 0.6)
 	box-shadow 0 0 5px rgba(0, 0, 0, 0.3)
-	padding 10px 0
+	padding 5px 0
 
 	&__logo
-		col(1/4)
+		float left
 		opacity 0.6
 
 	&__account
-		col(3/4)
+		float right
 		text-align right
+
+		&__name
+			float left
+			margin 5px 15px 0
+			opacity 0.6
+			text-align right
+			text-transform uppercase
+
+			&--first,
+			&--last
+				display block
+
+			&--first
+				font-size 1.5em
+
+		&__avatar
+			border 1px solid rgba(0, 0, 0, 0.4)
+			float left
+			margin-bottom -30px
+			width 75px
