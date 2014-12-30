@@ -13,6 +13,7 @@ var users = require('./routes/users');
 var org = require('./routes/organization');
 var location = require('./routes/location');
 var login = require('./routes/login');
+var logout = require('./routes/logout');
 var group = require('./routes/group');
 
 var auth = require('./modules/auth').init();
@@ -46,6 +47,7 @@ app.use('/users', users);
 app.use('/org', org);
 app.use('/location', location);
 app.use('/login', login);
+app.use('/logout', logout);
 app.use('/group', group);
 
 /// catch 404 and forward to error handler
