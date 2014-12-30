@@ -5,12 +5,22 @@ html
         meta(name="viewport", content="width=device-width, initial-scale=1")
         link(rel="stylesheet", href="/styles/main.css")
 
-    body
+    body(class= bodyClass)
+        header.site-header
+            .fixed-content
+                .site-header__logo
+                    a(href="/")
+                        img(src="/img/logo.png", alt="Grouplun.ch")
+
+                .site-header__account
+                    block account
+                        include account
+
         block content
 
         script(src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js")
         script(src="/plugins/select2/select2.min.js")
-        script(src="https://cdn.socket.io/socket.io-1.2.1.js")
+        script(src="//cdn.socket.io/socket.io-1.2.1.js")
         script(src="/js/main.min.js")
 
         block scripts

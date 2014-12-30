@@ -1,10 +1,8 @@
 extends layout
 
 block content
-    header.page-header.center
-        img(src="/img/Lunchnavigatorify-logo.png")
     .welcome.content
-        p.center Welcome to lunchnavigatorify <small>name pending</small>.  Please select your organization from below, or 
+        p.center Welcome to lunchnavigatorify <small>name pending</small>.  Please select your organization from below, or
             a.add-org(href="#") add one
 
         form.org-form.center(action='/org/new', method='post')
@@ -19,4 +17,4 @@ block content
 
         .organization
             block organizations
-                include organizations 
+                include organizations
