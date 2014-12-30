@@ -1,6 +1,4 @@
-"use strict";
-
-var Users = require('./users');
+var Groups = require('./group');
 
 var chatSocket = {
 
@@ -12,8 +10,7 @@ var chatSocket = {
 
 		this.io.on('connection', function (socket) {
 
-			console.log("There has been a new socket connection");
-
+            console.log("There has been a new socket connection");
 		});
 
 		return this.io;
@@ -24,10 +21,10 @@ var chatSocket = {
 		var nsp = this.io.of('/' + group);
 
 		// emit the users as soon as someone makes a new connection
-		nsp.sockets.emit('users updated', Users.userList);
+		nsp.sockets.emit('users updated', Groups[group].currentUsers);
 
 		nsp.on('new user', function (user) {
-			Users.addUser(user, function (userList) {
+			Groups.addUser(group, user, function (userList) {
 				nsp.emit('users updated', userList);
 			});
 		});
@@ -37,7 +34,6 @@ var chatSocket = {
 		});
 
 	}
-
 };
 
 module.exports = chatSocket;

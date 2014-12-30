@@ -1,5 +1,5 @@
 var appConfig = {
-	'appUrl': 'http://localhost:3000/',
+    'appUrl': 'http://localhost:3000/',
     'google': {
         'clientID': '',
         'clientSecret': ''

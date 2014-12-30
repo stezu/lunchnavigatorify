@@ -1,5 +1,11 @@
-var gps = require('gps2zip');
+var gps2zip = (function () {
+    "use strict";
 
-module.exports = function (lat, lon) {
-    return gps.gps2zip(lat, lon);
-};
+    var gps = require('gps2zip');
+
+    return function (lat, lon) {
+        return gps.gps2zip(lat, lon);
+    };
+}());
+
+module.exports = gps2zip;

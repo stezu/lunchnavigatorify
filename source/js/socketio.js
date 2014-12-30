@@ -1,10 +1,10 @@
 (function (chat) {
-	
-	"use strict";
+    
+    "use strict";
 
-	var socketio = {
+    var socketio = {
 
-		socket: io.connect(location.origin),
+        socket: io.connect(location.origin),
 
 		init: function (namespace) {
 
@@ -21,10 +21,10 @@
 			});
 		}
 
-	};
+    };
 
-	window.socketio = socketio;
+    window.socketio = socketio;
 
 }(
-	window.chat
+    window.chat
 ));

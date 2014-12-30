@@ -1,10 +1,14 @@
-var gulp = require('gulp');
+var gulp = require('gulp'),
+    files = {
+        js: ['./source/js/*.js', './routes/*.js', './modules/*.js', './app.js'],
+        styl: ['./source/styl/main.styl']
+    };
 
 gulp.task('lint', function () {
     var jshint = require('gulp-jshint'),
         stylish = require('jshint-stylish');
 
-    gulp.src(['./source/js/*.js', './routes/*.js', './app.js'])
+    gulp.src(files.js)
         .pipe(jshint())
         .pipe(jshint.reporter(stylish));
 });
@@ -13,7 +17,7 @@ gulp.task('build-js', function () {
     var concat = require('gulp-concat'), 
         uglify = require('gulp-uglify');
 
-    gulp.src('./source/js/*.js')
+    gulp.src(files.js[0])
         .pipe(concat('main.min.js'))
         // .pipe(uglify())
         .pipe(gulp.dest('./public/js'));
@@ -23,7 +27,7 @@ gulp.task('stylus', function () {
     var stylus = require('gulp-stylus'),
         autoprefixer = require('gulp-autoprefixer');
 
-    gulp.src('./source/styl/main.styl')
+    gulp.src(files.styl)
         .pipe(stylus({compress: true}))
         .pipe(autoprefixer())
         .pipe(gulp.dest('./public/styles'));
@@ -47,7 +51,7 @@ gulp.task('server', function () {
 });
 
 gulp.task('watch', function () {
-    gulp.watch(['./source/js/*.js', './source/styl/**/*.styl'], ['stylus', 'lint', 'build-js']);
+    gulp.watch(files.js.concat(files.styl), ['stylus', 'lint', 'build-js']);
 });
 
 gulp.task('default', ['stylus', 'lint', 'build-js', 'server', 'watch']);
