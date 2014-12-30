@@ -9,9 +9,13 @@ router.use(auth.ensure);
 router.post('/new', function (req, res) {
     db.save('organizations',
         {
-            'name': req.body.orgName,
-            'slug': req.body.url,
-            'zip':  req.body.zip
+            'name' : req.body.orgName,
+            'slug' : req.body.url,
+            'zip'  : req.body.zip,
+            'users': [{
+                'role': 'admin',
+                '_id' : req.user._id
+            }]
         },
         function (err, results) {
             console.log(results, 'was saved.');
@@ -24,6 +28,27 @@ router.post('/new', function (req, res) {
             });
         }
     );
+});
+
+router.use('/:organization', function (req, res, next) {
+    db.find('organizations',
+    {
+        'slug' : req.param('organization'),
+        'users': {
+            '$elemMatch': {
+                '_id': req.user._id
+            }
+        }
+    },
+    function (err, results) {
+        if (err) { 
+            console.log('There was an error authenticating the user.');
+        } else {
+            if (results.length) { return next(); }
+
+            res.redirect('/');
+        }
+    });
 });
 
 router.get('/:organization', function (req, res) {
