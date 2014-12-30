@@ -11,7 +11,7 @@ var auth = (function () {
             passport.use(new GoogleStrategy({
                     clientID: config.google.clientID,
                     clientSecret: config.google.clientSecret,
-                    callbackURL: config.appUrl + 'login/google/callback',
+                    callbackURL: config.appUrl + 'login/google/callback'
                 },
                 function(accessToken, refreshToken, profile, done) {
                     // console.log(accessToken, refreshToken, profile, done);
@@ -23,25 +23,35 @@ var auth = (function () {
                         },
                         update: {
                             accessToken: accessToken,
+                            refreshToken: refreshToken,
+                            provider: 'google',
+                            providerId: profile.id,
                             displayName: profile.displayName,
-                            email: profile.emails[0].value,
-                            refreshToken: refreshToken
+                            email: profile.emails[0].value
                         },
                         new: true,
                         upsert: true
                     },
                     function (err, results) {
-                        return done(null, results);
+                        if (err) { return done(err); }
+                        done(null, results);
                     });
                 }
             ));
 
             passport.serializeUser(function(user, done) {
-                done(null, user);
+                done(null, user.providerId);
             });
 
-            passport.deserializeUser(function(user, done) {
-                done(null, user);
+            passport.deserializeUser(function(id, done) {
+                db.findOne('users',
+                {
+                    provider: 'google',
+                    providerId: id
+                },
+                function (err, user) {
+                    done(err, user);
+                });
             });
 
             return passport;
@@ -51,7 +61,7 @@ var auth = (function () {
             if (req.isAuthenticated()) { return next(); }
             req.session.returnTo = req.originalUrl;
 
-            res.redirect(config.appUrl + 'login/google');
+            res.redirect(config.appUrl + 'login');
         }
     };
 }());
