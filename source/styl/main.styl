@@ -1,52 +1,72 @@
-@import "select2"
 
-// ===================
-// Variables
-// ===================
-$blue = #40b0bf
+/*
+ * Using this Stylus file
+ * ======================
+ *
+ * This file system is organized using a variation of Atomic Design,
+ * styles are organized from small parts (atoms), to full pages (templates).
+ *
+ * In addition, there are helper functions and mixins that are defined first.
+ * If this is done properly, there will be no repeat styles, and little to no overriding.
+ *
+ * As a style guide, keep nesting to a maximum of 3 levels (not including pseudo selectors),
+ * limit use of advanced selectors (>, +, ~, etc), and avoid use of IDs if possible
+ *
+ *
+ * Definitions
+ * -----------
+ * Utilities - functions, mixins, variables
+ * Atoms - element styles, small building blocks (buttons, inputs, images)
+ * Molecules - combination of atoms (forms, widgets)
+ * Organisms - multiple molecules (header, sidebar, footer)
+ * Templates - multiple organisms (home, accounts)
+ * Pages - page specific overrides of templates
+ */
 
-// ===================
-// Globals
-// ===================
-*
-    box-sizing border-box
+// =======================
+// Utilities
+// =======================
+@import "_utilities/variables"
+@import "_utilities/mixins"
+@import "_utilities/jeet/index"
 
-html,
-body
-    height 100%
-    margin 0
-    min-height 100%
-    padding 0
 
-input,
-textarea
-    -webkit-appearance none
-    appearance none
+// =======================
+// Atoms
+// =======================
+@import "atoms/normalize"
+@import "atoms/globals"
+@import "atoms/buttons"
+
+
+// =======================
+// Molecules
+// =======================
+@import "molecules/select2"
+
+
+// =======================
+// Organisms
+// =======================
+@import "organisms/header"
+
+
+// =======================
+// Templates
+// =======================
+@import "templates/home"
+
 
 // ===================
 // Patterns
 // ===================
-.button
-    background #f6f6f6
-    border 1px solid #ddd
-    border-radius 4px
-    color #444
-    display inline-block
-    padding 10px 15px
-    text-decoration none
-    transition background 250ms
-
-    &:hover,
-    &:focus
-        background darken(#f6f6f6, 5%)
-
 .content
     margin 0 auto
     width 800px
 
 .center
     text-align center
-    
+
 // ===================
 // Home
 // ===================
@@ -55,13 +75,13 @@ textarea
 
     fieldset
         border none
-        
+
 .org-form__field
     border none
     border-bottom 1px solid #ccc
     padding 5px 10px
     margin-right 10px
-    
+
     &:focus
         border-bottom 2px solid #aaa
         outline none
@@ -264,7 +284,7 @@ textarea
     min-height 200px
     position relative
     width 75%
-    
+
     .chat-content
         min-height: 200px
         width 100%

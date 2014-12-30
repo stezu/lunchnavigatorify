@@ -1,7 +1,7 @@
 var gulp = require('gulp'),
     files = {
         js: ['./source/js/*.js', './routes/*.js', './modules/*.js', './app.js'],
-        styl: ['./source/styl/main.styl']
+        styl: ['./source/styl/main.styl', './source/styl/**/*.styl']
     };
 
 gulp.task('lint', function () {
@@ -14,7 +14,7 @@ gulp.task('lint', function () {
 });
 
 gulp.task('build-js', function () {
-    var concat = require('gulp-concat'), 
+    var concat = require('gulp-concat'),
         uglify = require('gulp-uglify');
 
     gulp.src(files.js[0])
@@ -27,7 +27,7 @@ gulp.task('stylus', function () {
     var stylus = require('gulp-stylus'),
         autoprefixer = require('gulp-autoprefixer');
 
-    gulp.src(files.styl)
+    gulp.src(files.styl[0])
         .pipe(stylus({compress: true}))
         .pipe(autoprefixer())
         .pipe(gulp.dest('./public/styles'));
