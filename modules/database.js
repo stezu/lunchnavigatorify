@@ -4,7 +4,7 @@ var database = (function () {
     var config = require('../appconfig.js'),
         mongojs = require('mongojs');
 
-    var db = mongojs(config.mongo.mongo_uri, ['restaurants', 'organizations', 'users']);
+    var db = mongojs(config.mongo.mongo_uri, ['organizations', 'users']);
 
     return {
         getObjectId: function (id) {
