@@ -4,30 +4,38 @@ var Users = require('./users');
 
 var chatSocket = {
 
+	io: null,
+
 	init: function (server) {
 
-		var io = require('socket.io')(server);
+		this.io = require('socket.io')(server);
 
-		io.on('connection', function (socket) {
+		this.io.on('connection', function (socket) {
 
 			console.log("There has been a new socket connection");
 
-			// emit the users as soon as someone makes a new connection
-			io.sockets.emit('users updated', Users.userList);
-
-			socket.on('new user', function (user) {
-				Users.addUser(user, function (userList) {
-					io.sockets.emit('users updated', userList);
-				});
-			});
-
-			socket.on('new message', function (data) {
-				io.sockets.emit('apply new message', data);
-			});
-
 		});
 
-		return io;
+		return this.io;
+	},
+
+	newGroup: function (group) {
+
+		var nsp = this.io.of('/' + group);
+
+		// emit the users as soon as someone makes a new connection
+		nsp.sockets.emit('users updated', Users.userList);
+
+		nsp.on('new user', function (user) {
+			Users.addUser(user, function (userList) {
+				nsp.emit('users updated', userList);
+			});
+		});
+
+		nsp.on('new message', function (data) {
+			nsp.emit('apply new message', data);
+		});
+
 	}
 
 };

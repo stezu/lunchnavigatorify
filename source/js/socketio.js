@@ -6,15 +6,17 @@
 
 		socket: io.connect(location.origin),
 
-		init: function () {
+		init: function (namespace) {
+
+			var nsp = io.of('/' + namespace);
 
 			// listen for when the server updates
 			// the list of current users
-			this.socket.on('users updated', function (users) {
+			nsp.on('users updated', function (users) {
 				chat.updateUserList(users);
 			});
 
-			this.socket.on('apply new message', function (data) {
+			nsp.on('apply new message', function (data) {
 				chat.addMessage(data);
 			});
 		}

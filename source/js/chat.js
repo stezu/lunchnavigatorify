@@ -9,6 +9,7 @@
 		$chatMessage: $('.message'),
 		$chatz: $('.chatz'),
 		$sendButton: $('.send-message'),
+		namespace: window.location.pathname.split('/')[2],
 
 		init: function () {
 
@@ -17,7 +18,7 @@
 
 			// any initialization steps necessary for chat goes here
 
-			window.socketio.init();
+			window.socketio.init(this.namespace);
 
 			self.$chatWindow.hide();
 

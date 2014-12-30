@@ -2,12 +2,16 @@ var express = require('express'),
 	router = express.Router();
 
 var db = require('../modules/database'),
-	auth = require('../modules/auth');
+	auth = require('../modules/auth'),
+	groups = require('../modules/group');
 
 router.use(auth.ensure);
 
 // TODO: we will update the db to use 'groups' istead of orgs, using this now so we can have some data
 router.get('/:group', function (req, res) {
+
+
+
     db.findOne('organizations', { slug: req.param('group') }, function (err, results) {
         if (err) {
             // this should send a friendly mesaage to the user that maybe triggers an alert or something

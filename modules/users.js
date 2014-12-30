@@ -1,8 +1,12 @@
-"use strict";
+var db = require('./database');
 
-var users = {
+var Groups = {
 
 	userList: [],
+
+	addGroup: function (group) {
+		db.save('groups', {}, function (err, results) {});
+	},
 
 	addUser: function (user, cb) {
 		this.userList.push(user);
