@@ -14,7 +14,7 @@ var auth = (function () {
                     callbackURL: config.appUrl + 'login/google/callback',
                 },
                 function(accessToken, refreshToken, profile, done) {
-                    console.log(accessToken, refreshToken, profile, done);
+                    // console.log(accessToken, refreshToken, profile, done);
                     db.findAndModify('users',
                     {
                         query: {

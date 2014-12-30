@@ -17,7 +17,7 @@ router.post('/new', function (req, res) {
             console.log(results, 'was saved.');
 
             db.find('organizations', {}, function (err, results) {
-                console.log(results);
+                // console.log(results);
                 res.render('organizations', {
                     organizations: results
                 });
@@ -32,7 +32,7 @@ router.get('/:organization', function (req, res) {
             // this should send a friendly mesaage to the user that maybe triggers an alert or something
             console.log('There was an error retrieving your organization\'s restaurants.');
         } else {
-            console.log(results);
+            // console.log(results);
             res.render('index', {
                 title: results.name + ' lunch spots',
                 zip: results.zip,
