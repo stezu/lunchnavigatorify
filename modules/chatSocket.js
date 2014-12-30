@@ -1,39 +1,42 @@
-var Groups = require('./group');
+var chatSocket = (function () {
+    "use strict";
 
-var chatSocket = {
+    var groups = require('./group');
 
-	io: null,
+    return {
 
-	init: function (server) {
+        io: null,
 
-		this.io = require('socket.io')(server);
+        init: function (server) {
 
-		this.io.on('connection', function (socket) {
+            this.io = require('socket.io')(server);
 
-            console.log("There has been a new socket connection");
-		});
+            this.io.on('connection', function (socket) {
 
-		return this.io;
-	},
+                console.log("There has been a new socket connection");
+            });
 
-	newGroup: function (group) {
+            return this.io;
+        },
 
-		var nsp = this.io.of('/' + group);
+        newGroup: function (group) {
 
-		// emit the users as soon as someone makes a new connection
-		nsp.sockets.emit('users updated', Groups[group].currentUsers);
+            var nsp = this.io.of('/' + group);
 
-		nsp.on('new user', function (user) {
-			Groups.addUser(group, user, function (userList) {
-				nsp.emit('users updated', userList);
-			});
-		});
+            // emit the users as soon as someone makes a new connection
+            nsp.sockets.emit('users updated', groups[group].currentUsers);
 
-		nsp.on('new message', function (data) {
-			nsp.emit('apply new message', data);
-		});
+            nsp.on('new user', function (user) {
+                groups.addUser(group, user, function (userList) {
+                    nsp.emit('users updated', userList);
+                });
+            });
 
-	}
-};
+            nsp.on('new message', function (data) {
+                nsp.emit('apply new message', data);
+            });
+        }
+    };
+}());
 
 module.exports = chatSocket;

@@ -2,8 +2,8 @@ var express = require('express'),
     router = express.Router();
 
 var db = require('../modules/database'),
-	auth = require('../modules/auth'),
-	groups = require('../modules/group');
+    auth = require('../modules/auth'),
+    groups = require('../modules/group');
 
 router.use(auth.ensure);
 
