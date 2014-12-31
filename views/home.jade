@@ -1,20 +1,9 @@
 extends layout
 
 block content
-    .welcome.content
-        p.center Welcome to lunchnavigatorify <small>name pending</small>.  Please select your organization from below, or
-            a.add-org(href="#") add one
-
-        form.org-form.center(action='/org/new', method='post')
-            fieldset.org-form__inputs
-                input.org-form__field(name='orgName', placeholder='Organization Name')
-
-                input.org-form__field(name='url', placeholder='Organization URL')
-
-                input.org-form__field(name='zip', placeholder='Organization Zip Code')
-
-                input.org-form__field(type='submit', value='Submit')
-
-        .organization
-            block organizations
-                include organizations
+    section.full-height.welcome
+        .fixed-content
+            h1.welcome__title Find Your Group
+            form.welcome__find-group(action="/search", method="GET")
+                input.welcome__find-group__input(name="s", id="s")
+                label.welcome__find-group__label(for="s") Search by Group Name, Members or Location

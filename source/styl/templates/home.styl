@@ -1,2 +1,48 @@
 body.home
-	background #fff url('../img/home-hero.jpg') 0 0/cover
+    background #fff url('../img/home-hero.jpg') 0 0/cover
+
+.welcome
+    color #fff
+    display flex
+    text-align center
+
+    .fixed-content
+        flex 1
+        margin auto
+
+    &__title
+        font-weight 100
+        margin 0 0 5px
+        text-shadow 0 0 5px rgba(0, 0, 0, 0.3)
+        text-transform uppercase
+
+    &__find-group
+
+        &__input,
+        &__label
+            display block
+
+        &__input
+            background rgba(255, 255, 255, 0.2)
+            border 1px solid rgba(255, 255, 255, 0.5)
+            box-shadow 0 0 5px rgba(0, 0, 0, 0.3)
+            font-size 1.2em
+            margin 10px auto
+            max-width 650px
+            padding 15px 20px
+            text-align center
+            text-shadow 0 0 5px rgba(0, 0, 0, 0.3)
+            width 70%
+
+            &:hover,
+            &:focus
+                box-shadow 0 0 8px rgba(0, 0, 0, 0.4)
+
+            &:focus
+                background rgba(255, 255, 255, 0.1)
+
+        &__label
+            font-size 0.9em
+            font-weight 100
+            text-transform uppercase
+            text-shadow 0 0 5px rgba(0, 0, 0, 0.3)
