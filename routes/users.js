@@ -5,11 +5,11 @@ var db = require('../modules/database');
 
 /* GET users listing. */
 router.get('/', function(req, res) {
-	db.find('users',
-		{},
-		function (err, results) {
-			res.send(results);
-	});
+    db.find('users',
+        {},
+        function (err, results) {
+            res.send(results);
+    });
 });
 
 module.exports = router;
