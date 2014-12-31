@@ -42,7 +42,7 @@ router.use('/:organization', function (req, res, next) {
         }
     },
     function (err, results) {
-        if (err) { 
+        if (err) {
             console.log('There was an error authenticating the user.');
         } else {
             if (results.length) { return next(); }
@@ -58,7 +58,7 @@ router.get('/:organization', function (req, res) {
             // this should send a friendly message to the user that maybe triggers an alert or something
             console.log('There was an error retrieving your organization\'s restaurants.');
         } else {
-            res.render('index', {
+            res.render('organization', {
                 'title'    : results.name + ' lunch spots',
                 'zip'      : results.zip,
                 'locations': results.restaurants ? results.restaurants : []
