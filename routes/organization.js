@@ -76,7 +76,7 @@ router.post('/:organization', function (req, res) {
         'update': {
             '$push': {
                 'restaurants': {
-                    '_id': db.makeObjectId(),
+                    '_id' : db.makeObjectId(),
                     'yelp': {
                         'name'     : req.body.name ? req.body.name : null,
                         'id'       : req.body.id ? req.body.id : null,

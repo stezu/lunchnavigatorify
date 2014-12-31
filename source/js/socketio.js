@@ -1,5 +1,5 @@
 (function (chat) {
-    
+
     "use strict";
 
     var socketio = {
