@@ -40,6 +40,17 @@ app.use(auth.initialize());
 app.use(auth.session());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// global variables for views
+app.use(function(req, res, next) {
+    if (req.user) {
+        var hash = require('crypto').createHash('md5').update(req.user.email).digest('hex');
+        req.user.avatar = 'http://www.gravatar.com/avatar/' + hash;
+        res.locals.user = req.user;
+    }
+
+    next();
+});
+
 app.use('/', routes);
 app.use('/search', search);
 app.use('/restaurant', restaurant);

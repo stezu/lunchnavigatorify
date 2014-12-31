@@ -1,8 +1,9 @@
 block account
 	if user
-		.site-header__account__name
-			span.site-header__account__name--first= user.name.first
-			span.site-header__account__name--last= user.name.last
+		if user.name
+			.site-header__account__name
+				span.site-header__account__name--first= user.name.first
+				span.site-header__account__name--last= user.name.last
 		img.site-header__account__avatar(src= user.avatar)
 	else
 		a.button(href="/login") Login
