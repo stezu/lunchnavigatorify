@@ -1,7 +1,7 @@
 jQuery(function($) {
     var $document = $(document),
         $orgForm = $('.org-form'),
-        $searchForm = $('.yelp-search'),
+        $yelpForm = $('.yelp-search'),
         $results = $('.results');
 
     $('.add-org').on('click', function (e) {
@@ -41,11 +41,27 @@ jQuery(function($) {
             $(this).hide();
         });
 
-    $searchForm
+    $yelpForm
+        .on('submit', function() {
+            var data = $yelpForm.find('.yelp-search__field--text').select2('data');
+
+            // If we submit an empty form, that's stupid.
+            if (data !== null || data.length) {
+                $.ajax({
+                    data: data,
+                    type: 'post',
+                    success: function(results) {
+                        $results.html(results);
+                    }
+                });
+            }
+
+            return false;
+        })
         .find('.yelp-search__field--text').select2({
             minimumInputLength: 2,
             ajax: {
-                url: $searchForm[0].action,
+                url: $yelpForm[0].action,
                 quietMillis: 150,
                 data: function (term, page) {
                     return {
@@ -63,7 +79,7 @@ jQuery(function($) {
                 if (restaurant.image_url !== undefined) {
                     markup += '<img class="restaurant__image" src="' + restaurant.image_url + '">';
                 }
-                markup += '<div class="restaurant__info"><h3 class="restaurant__name">' + restaurant.name + '</div>';
+                markup += '<div class="restaurant__info"><h3 class="restaurant__name">' + restaurant.name + '</h3></div>';
                 if (restaurant.location.display_address !== undefined) {
                     markup += '<div class="restaurant__address">' + restaurant.location.display_address + '</div>';
                 }
@@ -80,45 +96,28 @@ jQuery(function($) {
             escapeMarkup: function (m) {
                 return m;
             }
+        });
+
+    $document
+        .on('click touchend', '.results__list__item__delete', function () {
+            $.ajax({
+                data: {
+                    id: $(this).data('id')
+                },
+                type: 'delete',
+                success: function(results) {
+                    console.log(results);
+                    $results.html(results);
+                }
+            });
+            return false;
         })
-        .end()
-        .submit(function() {
-            var data = $searchForm.find('.yelp-search__field--text').select2('data');
+        .on('click touchend', '.page-header__random', function () {
+            var $items = $results.find('.results__list__item').removeClass('selected');
 
-            // If we submit an empty form, that's stupid.
-            if (data !== null || data.length) {
-                $.ajax({
-                    data: data,
-                    type: 'post',
-                    success: function(results) {
-                        $results.html(results);
-                    }
-                });
-            }
-
+            $($items[Math.floor(Math.random() * $items.length)]).addClass('selected');
             return false;
         });
-
-    $document.on('click touchend', '.results__list__item__delete', function () {
-        $.ajax({
-            data: {
-                id: $(this).data('id')
-            },
-            type: 'delete',
-            success: function(results) {
-                console.log(results);
-                $results.html(results);
-            }
-        });
-        return false;
-    });
-
-    $document.on('click touchend', '.page-header__random', function () {
-        var $items = $results.find('.results__list__item').removeClass('selected');
-
-        $($items[Math.floor(Math.random() * $items.length)]).addClass('selected');
-        return false;
-    });
 
     window.chat.init();
 

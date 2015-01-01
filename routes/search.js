@@ -11,12 +11,26 @@ router.get('/', function (req, res) {
         'slug': 'text',
         'location': 'text'
     }, {
+        'name': 'groupIndex',
         'weights': {
            'name': 4,
            'location': 3,
            'slug': 2
         }
     });
+
+    db.ensureIndex('users',
+    {
+        'name': 'text'
+    }, {
+        'name': 'userIndex',
+        'weights': {
+            'name': 4,
+            'email': 2
+        }
+    });
+
+    var data = [];
 
     db.find('groups',
     {
@@ -25,7 +39,18 @@ router.get('/', function (req, res) {
         }
     },
     function (err, results) {
-        res.send(results);
+        data = data.concat(results);
+
+        db.find('users',
+        {
+            '$text': {
+                '$search': req.query.s
+            }
+        },
+        function (err, results) {
+            data = data.concat(results);
+            res.send(data);
+        });
     });
 });
 
