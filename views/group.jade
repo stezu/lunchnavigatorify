@@ -1,0 +1,25 @@
+extends layout
+
+block content
+    header.group-header.center
+        h1.group-header__title= title
+
+    block chat
+        include chat
+
+    div(style="border-bottom: 1px solid #ccc; clear: both; margin: 25px")
+
+    p.center Showing Results for Zip: <span class="zip" contentEditable="true">#{ zip }</span> (Click to change)
+
+    form.yelp-search(action='/yelp', method='post')
+        fieldset.yelp-search__inputs
+            input.yelp-search__field.yelp-search__field--text(name='restaurant', placeholder='Search for a restaurant', type='search')
+
+            input.yelp-search__field.yelp-search__field--submit(type='submit', value='Submit')
+
+    p.center
+        a.page-header__random.button.button-primary(href="#") Pick my Lunch
+
+    .results
+        block results
+            include results
