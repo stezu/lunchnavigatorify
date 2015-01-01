@@ -45,7 +45,7 @@ jQuery(function($) {
         .find('.yelp-search__field--text').select2({
             minimumInputLength: 2,
             ajax: {
-                url: '/search',
+                url: $searchForm[0].action,
                 quietMillis: 150,
                 data: function (term, page) {
                     return {

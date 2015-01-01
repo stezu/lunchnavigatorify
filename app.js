@@ -6,21 +6,10 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-var routes = require('./routes/index');
-var search = require('./routes/search');
-var restaurant = require('./routes/restaurant');
-var users = require('./routes/users');
-var org = require('./routes/organization');
-var location = require('./routes/location');
-var login = require('./routes/login');
-var logout = require('./routes/logout');
-var group = require('./routes/group');
-
-var auth = require('./modules/auth').init();
-
 var app = express(),
     server = require('http').Server(app),
-    io = require('./modules/chatSocket').init(server);
+    io = require('./modules/chatSocket').init(server),
+    auth = require('./modules/auth').init();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -51,15 +40,15 @@ app.use(function(req, res, next) {
     next();
 });
 
-app.use('/', routes);
-app.use('/search', search);
-app.use('/restaurant', restaurant);
-app.use('/users', users);
-app.use('/org', org);
-app.use('/location', location);
-app.use('/login', login);
-app.use('/logout', logout);
-app.use('/group', group);
+app.use('/', require('./routes/index'));
+app.use('/yelp', require('./routes/yelp'));
+app.use('/restaurant', require('./routes/restaurant'));
+app.use('/users', require('./routes/users'));
+app.use('/location', require('./routes/location'));
+app.use('/login', require('./routes/login'));
+app.use('/logout', require('./routes/logout'));
+app.use('/search', require('./routes/search'));
+app.use('/group', require('./routes/group'));
 
 /// catch 404 and forward to error handler
 app.use(function(req, res, next) {
