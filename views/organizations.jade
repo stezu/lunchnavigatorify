@@ -1,8 +1,0 @@
-block organizations
-
-    ul.organization__list
-        - each org in organizations
-            li.organization__list__item
-
-                if (org.slug)
-                    a.organization__list__item__link(href="/org/#{ org.slug }")= org.name

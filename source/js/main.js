@@ -34,7 +34,7 @@ jQuery(function($) {
                     zip: e.currentTarget[3].value
                 },
                 success: function (data) {
-                    $('.organization').html(data);
+                    $('.group').html(data);
                 }
             });
 

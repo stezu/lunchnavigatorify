@@ -1,0 +1,8 @@
+block groups
+
+    ul.group__list
+        - each group in groups
+            li.group__list__item
+
+                if (group.slug)
+                    a.group__list__item__link(href="/group/#{ group.slug }")= group.name

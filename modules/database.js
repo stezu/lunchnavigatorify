@@ -4,7 +4,7 @@ var database = (function () {
     var config = require('../appconfig.js'),
         mongojs = require('mongojs');
 
-    var db = mongojs(config.mongo.mongo_uri, ['organizations', 'users']);
+    var db = mongojs(config.mongo.mongo_uri, ['groups', 'users']);
 
     return {
         getObjectId: function (id) {
@@ -13,6 +13,10 @@ var database = (function () {
 
         makeObjectId: function () {
             return new mongojs.ObjectId();
+        },
+
+        ensureIndex: function (collection, data, options) {
+            db[collection].ensureIndex(data, options);
         },
 
         find: function (collection, query, callback) {
