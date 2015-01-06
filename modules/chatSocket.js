@@ -1,42 +1,50 @@
-var chatSocket = (function () {
-    "use strict";
+var groups = require('./group');
 
-    var groups = require('./group');
+var chatSocket = {
 
-    return {
+    io: null,
 
-        io: null,
+    nsp: null,
 
-        init: function (server) {
+    init: function (server) {
 
-            this.io = require('socket.io')(server);
+        chatSocket.io = require('socket.io')(server);
 
-            this.io.on('connection', function (socket) {
+        chatSocket.io.on('connection', function (socket) {
+            console.log("There has been a new socket connection");
+        });
 
-                console.log("There has been a new socket connection");
-            });
+        return chatSocket.io;
+    },
 
-            return this.io;
-        },
+    newGroup: function (group) {
 
-        newGroup: function (group) {
+        chatSocket.nsp = this.io.of('/' + group);
 
-            var nsp = this.io.of('/' + group);
+        console.log('a new namespace hath been created and its /' + group);
 
-            // emit the users as soon as someone makes a new connection
-            nsp.sockets.emit('users updated', groups[group].currentUsers);
+        chatSocket.nsp.on('connection', function (socket) {
+            console.log('there has been a new connection to the nizzity namespace');
+        });
 
-            nsp.on('new user', function (user) {
-                groups.addUser(group, user, function (userList) {
-                    nsp.emit('users updated', userList);
-                });
-            });
+        // emit the users as soon as someone makes a new connection
+        // nsp.sockets.emit('users updated', groups[group].currentUsers);
 
-            nsp.on('new message', function (data) {
-                nsp.emit('apply new message', data);
-            });
-        }
-    };
-}());
+        // nsp.on('new user', function (user) {
+        //     groups.addUser(group, user, function (userList) {
+        //         nsp.emit('users updated', userList);
+        //     });
+        // });
+
+        chatSocket.nsp.on('new message', function (data) {
+            nsp.emit('apply new message', data);
+        });
+    },
+
+    groupExists: function (group) {
+        return chatSocket.nsp ? chatSocket.nsp.server.nsps['/' + group] : 0;
+    }
+
+};
 
 module.exports = chatSocket;

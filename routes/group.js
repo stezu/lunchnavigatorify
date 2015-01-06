@@ -4,7 +4,8 @@ var express = require('express'),
 var config = require('../appconfig.js'),
     db = require('../modules/database'),
     auth = require('../modules/auth'),
-    groups = require('../modules/group');
+    groups = require('../modules/group'),
+    socket = require('../modules/chatSocket');
 
 router.use(auth.ensure);
 
@@ -45,7 +46,7 @@ router.use('/:group', function (req, res, next) {
         if (err) {
             console.log('There was an error authenticating the user.');
         } else {
-            console.log(results);
+            // console.log(results);
             if (results.length) { return next(); }
 
             res.redirect('/');
@@ -54,6 +55,12 @@ router.use('/:group', function (req, res, next) {
 });
 
 router.get('/:group', function (req, res) {
+
+	// if a namespaced socket for this group doesn't exist already, start it up
+	if (!socket.groupExists(req.param('group'))) {
+		socket.newGroup(req.param('group'));
+	}
+
     db.findOne('groups',
     {
         'slug': req.param('group')

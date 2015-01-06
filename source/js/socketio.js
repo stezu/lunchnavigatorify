@@ -4,11 +4,12 @@
 
     var socketio = {
 
-        socket: io.connect(location.origin),
+        socket: null,
 
 		init: function (namespace) {
 
-			var nsp = io.of('/' + namespace);
+			var nsp = io('/' + namespace);
+			this.socket = nsp;
 
 			// listen for when the server updates
 			// the list of current users
@@ -19,6 +20,7 @@
 			nsp.on('apply new message', function (data) {
 				chat.addMessage(data);
 			});
+
 		}
 
     };

@@ -1,5 +1,5 @@
 (function ($, socketio, chat) {
-    
+
     "use strict";
 
     var group = {
