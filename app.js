@@ -42,7 +42,6 @@ app.use(function(req, res, next) {
 
 app.use('/', require('./routes/index'));
 app.use('/yelp', require('./routes/yelp'));
-app.use('/restaurant', require('./routes/restaurant'));
 app.use('/users', require('./routes/users'));
 app.use('/location', require('./routes/location'));
 app.use('/login', require('./routes/login'));
