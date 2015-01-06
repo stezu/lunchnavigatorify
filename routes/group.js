@@ -104,8 +104,8 @@ router.post('/:group', function (req, res) {
                 }
             }
         },
-        new: true,
-        upsert: true
+        'new': true,
+        'upsert': true
     },
     function (err, results) {
         if (err) {
@@ -133,8 +133,8 @@ router.delete('/:group', function (req, res) {
                 }
             }
         },
-        new: true,
-        upsert: true
+        'new': true,
+        'upsert': true
     },
     function (err, results) {
         if (err) {

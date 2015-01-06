@@ -8,5 +8,9 @@ block content
                 input.welcome__find-group__input(name="s", id="s")
                 label.welcome__find-group__label(for="s") Search by Group Name, Members or Location
 
-    block groups
-        include groups
+    block addGroup
+        include addGroup
+
+    .group
+        block groups
+            include groups

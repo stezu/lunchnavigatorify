@@ -22,23 +22,21 @@ jQuery(function($) {
 
     $orgForm
         .on('submit', function (e) {
+            var $this = $(this);
+
             e.preventDefault();
 
             // TODO validate submitted data
             $.ajax({
                 type: this.method,
                 url: this.action,
-                data: {
-                    orgName: e.currentTarget[1].value,
-                    url: e.currentTarget[2].value,
-                    zip: e.currentTarget[3].value
-                },
+                data: $this.serialize(),
                 success: function (data) {
                     $('.group').html(data);
                 }
             });
 
-            $(this).hide();
+            $this.hide();
         });
 
     $yelpForm
