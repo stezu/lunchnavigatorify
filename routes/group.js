@@ -46,10 +46,13 @@ router.use('/:group', function (req, res, next) {
         if (err) {
             console.log('There was an error authenticating the user.');
         } else {
-            // console.log(results);
-            if (results.length) { return next(); }
-
-            res.redirect('/');
+            if (results.length) {
+                console.log('User is a member of the "' + req.param('group') + '" group.');
+                return next();
+            } else {
+                console.log('User is not a member of the "' + req.param('group') + '" group.');
+                res.redirect('/');
+            }
         }
     });
 });
