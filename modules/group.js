@@ -1,22 +1,19 @@
-var group = (function () {
-    "use strict";
+var db = require('./database');
 
-    var db = require('./database');
+var group = {
 
-    return {
+        addUserToGroupSession: function (butts, user, cb) {
+            console.log("group butts", group[butts]);
+            if (!group[butts]) {
+                group[butts] = {
+                    users: []
+                };
+            }
 
-        addGroup: function (group) {
-            db.save('groups', {}, function (err, results) {});
-        },
+            group[butts].users.push(user);
 
-        addUser: function (group, user, cb) {
-            this.userList.push(user);
-
-            console.log('addUser has been called', user);
-
-            cb(this.userList);
+            cb(group[butts].users);
         }
-    };
-}());
+};
 
 module.exports = group;

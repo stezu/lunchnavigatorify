@@ -24,11 +24,11 @@ var chatSocket = {
         console.log('a new namespace hath been created and its /' + group);
 
         chatSocket.nsp.on('connection', function (socket) {
-            console.log('there has been a new connection to the nizzity namespace');
+            console.log('there has been a new connection to the nizzity namespace' + group);
+            chatSocket.nsp.emit('users updated', groups[group].users);
         });
 
         // emit the users as soon as someone makes a new connection
-        // nsp.sockets.emit('users updated', groups[group].currentUsers);
 
         // nsp.on('new user', function (user) {
         //     groups.addUser(group, user, function (userList) {
@@ -37,7 +37,17 @@ var chatSocket = {
         // });
 
         chatSocket.nsp.on('new message', function (data) {
-            nsp.emit('apply new message', data);
+            chatSocket.nsp.emit('apply new message', data);
+        });
+    },
+
+    newConnection: function (group, user) {
+        console.log('newConnection called with user', user);
+        chatSocket.nsp.emit('new connection to nsp', user);
+
+        groups.addUserToGroupSession(group, user, function (userList) {
+            console.log("userList in newConnection", userList);
+            // chatSocket.nsp.emit('users updated', userList);
         });
     },
 

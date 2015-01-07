@@ -18,24 +18,6 @@
 
             // any initialization steps necessary for chat goes here
 			window.socketio.init(this.namespace);
-
-            self.$chatWindow.hide();
-
-            $('.submit-username').on('click', function () {
-                if ($('.username').val()) {
-
-                    currentUser =  $('.username').val();
-
-                    $('.chat-login').hide();
-
-                    window.socketio.socket.emit('new user', { username: $('.username').val() });
-
-                    self.$chatWindow.show();
-                } else {
-                    alert('put in a name');
-                }
-            });
-
             self.$sendButton.on('click', function () {
                 if (self.$chatMessage.val()) {
 
@@ -62,7 +44,7 @@
             $userList.empty();
 
             for (var i = 0, len = users.length; i < len; i ++) {
-                $userList.append('<li>' + users[i].username + '</li>');
+                $userList.append('<li>' + users[i] + '</li>');
             }
         }
 

@@ -64,6 +64,8 @@ router.get('/:group', function (req, res) {
 		socket.newGroup(req.param('group'));
 	}
 
+	socket.newConnection(req.param('group'), req.user.name.display);
+
     db.findOne('groups',
     {
         'slug': req.param('group')
