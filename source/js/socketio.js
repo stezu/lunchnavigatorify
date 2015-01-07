@@ -21,6 +21,8 @@
 				chat.addMessage(data);
 			});
 
+			nsp.emit('new message', { fuck: 'fuck' });
+
 		}
 
     };

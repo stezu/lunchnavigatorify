@@ -12,7 +12,9 @@ var group = {
 
             group[butts].users.push(user);
 
-            cb(group[butts].users);
+            if (cb) {
+                cb(group[butts].users);
+            }
         }
 };
 

@@ -37,18 +37,15 @@ var chatSocket = {
         // });
 
         chatSocket.nsp.on('new message', function (data) {
+            console.log('new message has been hollered at', data);
             chatSocket.nsp.emit('apply new message', data);
         });
     },
 
     newConnection: function (group, user) {
-        console.log('newConnection called with user', user);
         chatSocket.nsp.emit('new connection to nsp', user);
 
-        groups.addUserToGroupSession(group, user, function (userList) {
-            console.log("userList in newConnection", userList);
-            // chatSocket.nsp.emit('users updated', userList);
-        });
+        groups.addUserToGroupSession(group, user);
     },
 
     groupExists: function (group) {
