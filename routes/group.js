@@ -44,14 +44,36 @@ router.use('/:group', function (req, res, next) {
     },
     function (err, results) {
         if (err) {
-            console.log('There was an error authenticating the user.');
+            console.log('There was an error authenticating the user:', err);
         } else {
             if (results.length) {
                 console.log('User is a member of the "' + req.param('group') + '" group.');
                 return next();
             } else {
                 console.log('User is not a member of the "' + req.param('group') + '" group.');
-                res.redirect('/');
+
+                // Add the user to the group (temporary for testing)
+                db.update('groups',
+                {
+                    'slug': req.param('group')
+                },
+                {
+                    '$push': {
+                        'users': {
+                            'role': 'member',
+                            '_id': req.user._id
+                        }
+                    }
+                },
+                function (err, results) {
+                    if (err) {
+                        console.log('There was an error adding the user to the group:', err);
+                    } else {
+                        console.log('User successfully added to the "' + req.param('group') + '" group.');
+
+                        return next();
+                    }
+                });
             }
         }
     });
