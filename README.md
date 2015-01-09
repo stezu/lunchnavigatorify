@@ -15,3 +15,5 @@ TODO
 - ~~ability to add an org~~
 - ~~auto-detect location would be cool https://developer.mozilla.org/en-US/docs/Web/API/Geolocation/Using_geolocation~~
 - ~clean up search box/results styles~
+
+you suck
