@@ -8,7 +8,7 @@ var chatSocket = {
 
     init: function (server) {
 
-        chatSocket.io = require('socket.io')(server);
+        chatSocket.io = require('socket.io').listen(server);
 
         chatSocket.io.on('connection', function (socket) {
             console.log("There has been a new socket connection");
@@ -21,31 +21,38 @@ var chatSocket = {
 
         chatSocket.nsp = this.io.of('/' + group);
 
-        console.log('a new namespace hath been created and its /' + group);
+        console.log('A new namespace has been created for: ' + group);
 
         chatSocket.nsp.on('connection', function (socket) {
-            console.log('there has been a new connection to the nizzity namespace' + group);
-            chatSocket.nsp.emit('users updated', groups[group].users);
-        });
+            console.log('There has been a new connection to the namespace:', group);
 
-        // emit the users as soon as someone makes a new connection
+            socket.emit('users updated', groups[group].users);
 
-        // nsp.on('new user', function (user) {
-        //     groups.addUser(group, user, function (userList) {
-        //         nsp.emit('users updated', userList);
-        //     });
-        // });
+            socket.on('new message', function (data) {
+                console.log('New message has been hollered at', data);
+                socket.emit('apply new message', data);
+            });
 
-        chatSocket.nsp.on('new message', function (data) {
-            console.log('new message has been hollered at', data);
-            chatSocket.nsp.emit('apply new message', data);
+            // emit the users as soon as someone makes a new connection
+            socket.on('new user', function (user) {
+                groups.addUser(group, user, function (userList) {
+                    socket.emit('users updated', userList);
+                });
+            });
+
+            socket.on('disconnect', function () {
+                groups.removeUser(group, socket.handshake.user, function (userList) {
+                    socket.emit('users updated', userList);
+                });
+            });
+
         });
     },
 
     newConnection: function (group, user) {
         chatSocket.nsp.emit('new connection to nsp', user);
 
-        groups.addUserToGroupSession(group, user);
+        groups.addUser(group, user);
     },
 
     groupExists: function (group) {

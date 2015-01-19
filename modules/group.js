@@ -2,20 +2,33 @@ var db = require('./database');
 
 var group = {
 
-        addUserToGroupSession: function (butts, user, cb) {
-            console.log("group butts", group[butts]);
-            if (!group[butts]) {
-                group[butts] = {
-                    users: []
-                };
-            }
+    addUser: function (groupName, user, cb) {
+        console.log(groupName, 'members:', group[groupName]);
 
-            group[butts].users.push(user);
-
-            if (cb) {
-                cb(group[butts].users);
-            }
+        if (!group[groupName]) {
+            group[groupName] = {
+                users: []
+            };
         }
+
+        group[groupName].users.push(user);
+
+        if (cb) {
+            cb(group[groupName].users);
+        }
+    },
+
+    removeUser: function (groupName, user, cb) {
+        var index = group[groupName].users.indexOf(user);
+
+        if (index > -1) {
+            group[groupName].users.splice(index, 1);
+        }
+
+        if (cb) {
+            cb(group[groupName].users);
+        }
+    }
 };
 
 module.exports = group;
