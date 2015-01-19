@@ -11,7 +11,7 @@ router.get('/', function (req, res) {
     function (err, results) {
         res.render('home', {
             bodyClass: 'home',
-            title: 'lunchnavigatorify',
+            title: 'gruplun.ch',
             groups: results
         });
     });
